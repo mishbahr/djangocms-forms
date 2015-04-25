@@ -1,0 +1,30 @@
+# Config file for automatic testing at travis-ci.org
+
+language: python
+
+python:
+  - "3.3"
+  - "2.7"
+  - "2.6"
+
+env:
+    - DJANGO="Django==1.5"
+    - DJANGO="Django==1.6"
+    - DJANGO="Django==1.7"
+
+matrix:
+    exclude:
+        # Python 2.6 support has been dropped in Django 1.7
+        - python: "2.6"
+          env: DJANGO="Django==1.7"
+
+# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install:
+ - pip install $DJANGO
+ - pip install -r requirements-test.txt
+
+# command to run tests using coverage, e.g. python setup.py test
+script: coverage run --source djangocms_forms runtests.py
+
+# report coverage to coveralls.io
+after_success: coveralls

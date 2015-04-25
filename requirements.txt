@@ -1,0 +1,4 @@
+-e .
+wheel==0.24.0
+
+# Additional requirements go here
