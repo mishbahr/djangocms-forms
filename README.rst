@@ -20,7 +20,7 @@ djangocms-forms
 .. image:: http://img.shields.io/coveralls/mishbahr/djangocms-forms.svg?style=flat-square
   :target: https://coveralls.io/r/mishbahr/djangocms-forms?branch=master
 
-The easiest and most flexible Django CMS Form builder! This project requires django-cms v3.0 or higher to be properly installed and configured.
+This project requires django-cms v3.0 or higher to be properly installed and configured.
 
 Features
 --------
