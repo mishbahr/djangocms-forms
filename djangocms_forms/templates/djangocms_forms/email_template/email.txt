@@ -1,0 +1,11 @@
+{% load i18n djangocms_forms_tags %}
+
+{% trans 'Form:' %} {{ form.name }}
+{% trans 'Date:' %} {% now "jS F Y H:i" %}
+
+{% for item in form_data %}
+{% if item.label %}{{ item.label }}{% else %}{{ item.name }}{% endif %}:
+{{ item.value|friendly|default_if_none:'—' }}
+{% endfor %}
+
+{% trans 'Sent via' %} http://{{ request.get_host }}

@@ -1,0 +1,19 @@
+{% load i18n djangocms_forms_tags %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>{{ title }}</title>
+    </head>
+    <body itemscope itemtype="http://schema.org/EmailMessage">
+        <h1>{{ form.title }}</h1>
+        <p><strong>{% trans 'Date:' %}</strong> {% now 'jS F Y H:i' %}</p>
+        {% for item in form_data %}
+            <p>
+                <strong>{% if item.label %}{{ item.label }}{% else %}{{ item.name }}{% endif %}:</strong><br/>
+                {{ item.value|friendly|default_if_none:'—' }}
+            </p>
+        {% endfor %}
+        {% trans 'Sent via' %} <a href="http://{{ request.get_host }}">{{ request.get_host }}</a>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+{% load cms_tags  djangocms_forms_tags i18n sekizai_tags staticfiles %}
+<div class="forms" id="{{ instance.form_id }}">
+	{% if instance.title %}
+		<h3 class="title">{{ instance.title }}</h3>
+	{% endif %}
+	{% if instance.description %}
+		<div class="description">
+			{{ instance.description|safe }}
+		</div>
+	{% endif %}
+	<div class="form-wrapper">
+		<form action="{{ form.submission_url }}" method="POST" enctype="multipart/form-data">
+			<div class="form-errors" style="display:none;"></div>
+			{% for field in form.visible_fields %}
+				<div class="field-wrapper {{ field|input_class }} {{ field.css_classes }}">
+                    <div class="field-errors" style="display:none;"></div>
+					{% if field|is_checkbox %}
+						{{ field }}
+					{% endif %}
+					<label for="{{ field.id_for_label }}">
+						{{ field.label }}{% if field|is_required %}<span class="asterisk">*</span>{% endif %}
+					</label>
+					{% if not field|is_checkbox %}
+						{{ field }}
+					{% endif %}
+					{% if field.help_text %}
+						<div id="help-text-{{ field.auto_id }}" class="help-text">{{ field.help_text|safe }}</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+			{% csrf_token %}
+			{% for hidden in form.hidden_fields %}
+				{{ hidden }}
+			{% endfor %}
+			<div class="button-wrapper submit">
+				<button class="form-button" type="submit" value="{{ instance.submit_btn_txt }}">{{ instance.submit_btn_txt }}</button>
+			</div>
+		</form>
+	</div>
+	<div class="form-success" style="display: none;">
+		{% if instance.post_submit_msg %}
+			<p>{{ instance.post_submit_msg|safe }}</p>
+		{% else %}
+			{% blocktrans %}
+				<h3>Submission successful</h3>
+				<p>Thank You! Your form has been successfully submitted!</p>
+			{% endblocktrans %}
+		{% endif %}
+	</div>
+</div>
+
+{% addtoblock "js" %}
+	<script src="{% static 'js/djangocms_forms/libs/jquery.form.min.js' %}"></script>
+	<script src="{% static 'js/djangocms_forms/djangocms_forms.js' %}"></script>
+	<script type="application/javascript">
+		$(function() {
+           $('.forms').djangocms_forms();
+		});
+	</script>
+{% endaddtoblock %}
+

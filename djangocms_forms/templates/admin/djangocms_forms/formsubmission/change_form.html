@@ -1,0 +1,26 @@
+{% extends "admin/change_form.html" %}
+{% load i18n djangocms_forms_tags %}
+
+{% block submit_buttons_bottom %}{% endblock %}
+
+{% block object-tools-items %}
+{% endblock %}
+
+
+{% block field_sets %}
+    {% if original.form_data %}
+        <fieldset class="module aligned">
+            {% for field in original.form_data %}
+                <div class="form-row required {{ field.name}}">
+                    <div>
+                        <label>
+                            {{ field.label }}:
+                        </label>
+                        <p>{{ field|to_html }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </fieldset>
+    {% endif %}
+	{{ block.super }}
+{% endblock %}

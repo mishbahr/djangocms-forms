@@ -1,0 +1,43 @@
+.inline-related {
+    border: 1px solid #CCC;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.08);
+}
+
+.inline-related h3 {
+    background-color: #FCFCFC;
+    padding: 10px 20px 10px 3px;
+    margin: 0;
+    text-align: center;
+}
+
+.inline-related .inline_label {
+    font-weight: 300;
+}
+
+
+.inline-related .collapse-expand {
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 0px 10px 0px 10px;
+    width: 44px;
+    float: left;
+    text-decoration:none!important;
+}
+
+.add-row {
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border: 1px dashed #CCC!important;
+    border-radius: 2px;
+    margin: 0;
+}
+
+.add-row a {
+    display: block;
+    padding-left: 14px;
+    text-indent: -9999px;
+    font-size: 11px;
+    background-position: 50% 50%!important;
+}
