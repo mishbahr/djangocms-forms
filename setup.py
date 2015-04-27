@@ -45,7 +45,7 @@ setup(
     zip_safe=False,
     keywords='djangocms-forms',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 4 - Beta',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
