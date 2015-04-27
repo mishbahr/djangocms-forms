@@ -22,11 +22,6 @@ djangocms-forms
 
 This project requires django-cms v3.0 or higher to be properly installed and configured.
 
-Features
---------
-
-* TODO
-
 
 Quickstart
 ----------
@@ -54,5 +49,13 @@ Quickstart
         url(r'^', include('djangocms_forms.urls')),
         ...
     )
+
+
+
+
+Preview
+--------
+
+* TODO
 
 
