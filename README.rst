@@ -58,7 +58,7 @@ Preview
 
 .. image:: http://mishbahr.github.io/djangocms-forms/assets/resized/djangocms_forms_001.jpeg
   :target: http://mishbahr.github.io/djangocms-forms/assets/djangocms_forms_001.png
-  :width: 100%
+  :width: 768px
   :align: center
 
 .. image:: http://mishbahr.github.io/djangocms-forms/assets/resized/djangocms_forms_005.jpeg
