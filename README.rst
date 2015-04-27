@@ -56,6 +56,28 @@ Quickstart
 Preview
 --------
 
-* TODO
+.. image:: http://mishbahr.github.io/djangocms-forms/assets/resized/djangocms_forms_001.jpeg
+  :target: http://mishbahr.github.io/djangocms-forms/assets/djangocms_forms_001.png
+  :width: 768px
+  :align: center
 
+.. image:: http://mishbahr.github.io/djangocms-forms/assets/resized/djangocms_forms_005.jpeg
+  :target: http://mishbahr.github.io/djangocms-forms/assets/djangocms_forms_005.png
+  :width: 768px
+  :align: center
+
+.. image:: http://mishbahr.github.io/djangocms-forms/assets/resized/djangocms_forms_002.jpeg
+  :target: http://mishbahr.github.io/djangocms-forms/assets/djangocms_forms_002.png
+  :width: 768px
+  :align: center
+
+.. image:: http://mishbahr.github.io/djangocms-forms/assets/resized/djangocms_forms_003.jpeg
+  :target: http://mishbahr.github.io/djangocms-forms/assets/djangocms_forms_003.png
+  :width: 768px
+  :align: center
+
+.. image:: http://mishbahr.github.io/djangocms-forms/assets/resized/djangocms_forms_004.jpeg
+  :target: http://mishbahr.github.io/djangocms-forms/assets/djangocms_forms_004.png
+  :width: 768px
+  :align: center
 
