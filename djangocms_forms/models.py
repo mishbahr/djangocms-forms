@@ -97,7 +97,9 @@ class FormDefinition(CMSPlugin):
 
     @property
     def upload_to(self):
-        return '%s-%s' % (slugify(unidecode(self.name)).replace('_', '-'), self.plugin_reference_id)
+        return '%s-%s' % (
+            slugify(unidecode(self.name)).replace('_', '-'),
+            self.plugin_reference_id)
 
     def copy_relations(self, oldinstance):
         for field in oldinstance.fields.all():

@@ -7,8 +7,8 @@ from django.contrib.auth import get_permission_codename
 from django.contrib.auth.admin import csrf_protect_m
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
-from django.shortcuts import redirect, render_to_response
-from django.template import RequestContext
+from django.shortcuts import redirect
+from django.template.response import TemplateResponse
 from django.template.defaultfilters import slugify, yesno
 from django.utils import timezone
 from django.utils.encoding import force_text
@@ -242,9 +242,9 @@ class FormSubmissionAdmin(admin.ModelAdmin):
             'errors': AdminErrorList(form, ()),
             'app_label': self.opts.app_label,
         }
-        return self.render_export_from(request, context, form_url)
+        return self.render_export_form(request, context, form_url)
 
-    def render_export_from(self, request, context, form_url=''):
+    def render_export_form(self, request, context, form_url=''):
         """
         Render the from submission export form.
         """
@@ -256,9 +256,7 @@ class FormSubmissionAdmin(admin.ModelAdmin):
             'save_on_top': self.save_on_top,
         })
 
-        context_instance = RequestContext(request, current_app=self.admin_site.name)
-        return render_to_response(
-            self.export_form_template, context, context_instance=context_instance)
+        return TemplateResponse(request, self.export_form_template, context)
 
 
 admin.site.register(FormSubmission, FormSubmissionAdmin)
