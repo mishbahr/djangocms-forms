@@ -38,6 +38,7 @@ setup(
         'django-appconf',
         'django-ipware',
         'jsonfield',
+        'unidecode',
         'tablib',
         'django-cms>=3.0',
     ],
