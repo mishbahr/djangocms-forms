@@ -160,6 +160,7 @@ class FormSubmission(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, verbose_name=_('User'), editable=False, null=True)
     ip = models.GenericIPAddressField(verbose_name='IP', blank=True, null=True)
+    http_referer = models.TextField(blank=True)
 
     form_data = JSONField(_('Form Data'))
 

@@ -51,13 +51,16 @@ class FormSubmissionAdmin(admin.ModelAdmin):
     change_form_template = 'admin/djangocms_forms/formsubmission/change_form.html'
     change_list_template = 'admin/djangocms_forms/formsubmission/change_list.html'
     export_form_template = 'admin/djangocms_forms/formsubmission/export_form.html'
-    list_display = ('plugin', 'creation_date_display', 'created_by',  'ip', )
+    list_display = ('plugin', 'creation_date_display', 'created_by', 'ip',
+                    'http_referer', )
     list_filter = (FormFilter, )
-    readonly_fields = ('creation_date_display', 'created_by', 'plugin', 'ip', )
+    readonly_fields = ('creation_date_display', 'created_by', 'plugin', 'ip',
+                       'http_referer', )
     date_hierarchy = 'creation_date'
     fieldsets = (
         (None, {
-            'fields': ('creation_date_display', 'created_by', 'ip', )
+            'fields': ('creation_date_display', 'created_by', 'ip',
+                       'http_referer', )
         }),
     )
 
@@ -180,7 +183,7 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                     }
                     return JsonResponse(data)
 
-            headers.extend(['Submitted on', 'Sender IP', ])
+            headers.extend(['Submitted on', 'Sender IP', 'HTTP Referer'])
             dataset.headers = headers
 
             def humanize(field):
@@ -202,9 +205,10 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                     label = field['label'].strip()
                     if label in headers:
                         row[headers.index(label)] = humanize(field)
-                    row[-2] = submission.creation_date.strftime(
+                    row[-3] = submission.creation_date.strftime(
                         settings.DJANGOCMS_FORMS_DATETIME_FORMAT)
-                    row[-1] = submission.ip
+                    row[-2] = submission.ip
+                    row[-1] = submission.http_referer
                 dataset.append(row)
 
             mimetype = {
