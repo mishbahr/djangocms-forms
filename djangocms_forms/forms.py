@@ -13,6 +13,7 @@ from unidecode import unidecode
 
 from .fields import FormBuilderFileField, MultipleChoiceAutoCompleteField
 from .models import Form, FormDefinition, FormField, FormSubmission
+from .utils import int_to_hashid
 from .widgets import DateInput, TelephoneInput, TimeInput
 
 
@@ -74,7 +75,7 @@ class FormBuilder(forms.Form):
         self.field_types = {}
 
         self.submission_url = reverse('djangocms_forms_submissions')
-        self.fields['form_id'].initial = form_definition.pk
+        self.fields['form_id'].initial = int_to_hashid(form_definition.pk)
         self.redirect_url = form_definition.redirect_url
 
         for field in form_definition.fields.all():

@@ -60,5 +60,7 @@ class DjangoCMSFormsConf(AppConf):
     DATETIME_FORMAT = '%d/%m/%Y %H:%M'
     EXPORT_FILENAME = 'export-{form_name}-%Y-%m-%d'
 
+    HASHIDS_SALT = settings.SECRET_KEY
+
     class Meta:
         prefix = 'djangocms_forms'

@@ -10,6 +10,7 @@ from .forms import FormBuilder
 from .models import FormDefinition
 from .signals import form_submission
 from .uploads import handle_uploaded_files
+from .utils import hashid_to_int
 
 try:
     from django.http import JsonResponse
@@ -23,7 +24,8 @@ class FormSubmission(FormView):
 
     def get_form_kwargs(self):
         form_kwargs = super(FormSubmission, self).get_form_kwargs()
-        form_definition = get_object_or_404(FormDefinition, pk=self.request.POST.get('form_id'))
+        form_id = hashid_to_int(self.request.POST.get('form_id'))
+        form_definition = get_object_or_404(FormDefinition, pk=form_id)
         form_kwargs.update({
             'form_definition': form_definition
         })

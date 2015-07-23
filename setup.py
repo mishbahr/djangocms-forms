@@ -40,6 +40,7 @@ setup(
         'jsonfield',
         'unidecode',
         'tablib',
+        'hashids',
         'django-cms>=3.0',
     ],
     license="BSD",
