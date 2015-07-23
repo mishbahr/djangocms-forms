@@ -10,4 +10,5 @@ Development Lead
 Contributors
 ------------
 
-None yet. Why not be the first?
+* Dries Desmet <dries@urga.be>
+* Sasha Matijasic <sasha@logit.hr>
