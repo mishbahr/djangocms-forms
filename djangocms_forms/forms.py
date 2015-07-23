@@ -255,6 +255,7 @@ class FormBuilder(forms.Form):
         FormSubmission.objects.create(
             plugin=self.form_definition.plugin_reference,
             ip=get_ip(request),
+            http_referer=request.META['HTTP_REFERER'],
             form_data=form_data,
             created_by=user)
 
