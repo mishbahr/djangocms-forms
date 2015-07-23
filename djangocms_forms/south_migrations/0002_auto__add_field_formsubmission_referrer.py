@@ -8,15 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'FormSubmission.http_referer'
-        db.add_column(u'djangocms_forms_formsubmission', 'http_referer',
-                      self.gf('django.db.models.fields.TextField')(default='', blank=True),
+        # Adding field 'FormSubmission.referrer'
+        db.add_column(u'djangocms_forms_formsubmission', 'referrer',
+                      self.gf('django.db.models.fields.CharField')(default='', max_length=150, blank=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'FormSubmission.http_referer'
-        db.delete_column(u'djangocms_forms_formsubmission', 'http_referer')
+        # Deleting field 'FormSubmission.referrer'
+        db.delete_column(u'djangocms_forms_formsubmission', 'referrer')
 
 
     models = {
@@ -152,10 +152,10 @@ class Migration(SchemaMigration):
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True'}),
             'creation_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'form_data': ('jsonfield.fields.JSONField', [], {}),
-            'http_referer': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'ip': ('django.db.models.fields.GenericIPAddressField', [], {'max_length': '39', 'null': 'True', 'blank': 'True'}),
-            'plugin': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'submissions'", 'to': u"orm['djangocms_forms.Form']"})
+            'plugin': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'submissions'", 'to': u"orm['djangocms_forms.Form']"}),
+            'referrer': ('django.db.models.fields.CharField', [], {'max_length': '150', 'blank': 'True'})
         },
         u'sites.site': {
             'Meta': {'ordering': "(u'domain',)", 'object_name': 'Site', 'db_table': "u'django_site'"},
