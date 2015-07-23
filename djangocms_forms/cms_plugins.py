@@ -105,7 +105,7 @@ class FormPlugin(CMSPluginBase):
         request = context['request']
 
         form = FormBuilder(
-            initial={'current_page': request.get_full_path()}, form_definition=instance,
+            initial={'referrer': request.path_info}, form_definition=instance,
             label_suffix='', auto_id='%s')
 
         context.update({

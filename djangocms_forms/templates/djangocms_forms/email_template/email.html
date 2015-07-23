@@ -14,6 +14,6 @@
                 {{ item.value|friendly|default_if_none:'—' }}
             </p>
         {% endfor %}
-        {% trans 'Sent via' %} <a href="http://{{ request.get_host }}">{{ request.get_host }}</a>
+        {% trans 'Sent via' %} <a href="http://{{ request.get_host }}{{ referrer }}">{{ request.get_host }}{{ referrer }}</a>
     </body>
 </html>

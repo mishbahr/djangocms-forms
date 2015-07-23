@@ -64,7 +64,7 @@ class FormBuilder(forms.Form):
     required_css_class = 'required'
 
     form_id = forms.CharField(widget=forms.HiddenInput)
-    current_page = forms.CharField(widget=forms.HiddenInput)
+    referrer = forms.CharField(widget=forms.HiddenInput)
 
     def __init__(self, form_definition, *args, **kwargs):
         super(FormBuilder, self).__init__(*args, **kwargs)
@@ -245,27 +245,31 @@ class FormBuilder(forms.Form):
                 'value': value,
                 'type': self.field_types[field],
             })
-        if self.form_definition.save_data:
-            self.save_to_db(form_data, request=request)
-        if self.form_definition.email_to:
-            self.email_submission(form_data, request=request)
 
-    def save_to_db(self, form_data, request):
+        referrer = self.cleaned_data.get('referrer', '')
+
+        if self.form_definition.save_data:
+            self.save_to_db(form_data, request=request, referrer=referrer)
+        if self.form_definition.email_to:
+            self.email_submission(form_data, request=request, referrer=referrer)
+
+    def save_to_db(self, form_data, request, referrer):
         user = request.user if request.user.is_authenticated() else None
         FormSubmission.objects.create(
             plugin=self.form_definition.plugin_reference,
             ip=get_ip(request),
-            http_referer=request.META['HTTP_REFERER'],
+            referrer=referrer,
             form_data=form_data,
             created_by=user)
 
-    def email_submission(self, form_data, request):
+    def email_submission(self, form_data, request, referrer):
         mail_to = re.compile('\s*[,;]+\s*').split(self.form_definition.email_to)
         mail_from = self.form_definition.email_from or None
         mail_subject = self.form_definition.email_subject or \
             'Form Submission - %s' % self.form_definition.name
         context = {
             'form': self.form_definition,
+            'referrer': referrer,
             'title': mail_subject,
             'form_data': form_data,
             'request': request,

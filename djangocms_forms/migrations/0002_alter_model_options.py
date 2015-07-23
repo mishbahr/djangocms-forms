@@ -23,10 +23,4 @@ class Migration(migrations.Migration):
             name='formsubmission',
             options={'ordering': ('-creation_date',), 'verbose_name': 'form submission', 'verbose_name_plural': 'form submissions', 'permissions': (('export_formsubmission', 'Can export Form Submission'),)},
         ),
-        migrations.AddField(
-            model_name='formsubmission',
-            name='http_referer',
-            field=models.TextField(blank=True),
-            preserve_default=True,
-        ),
     ]
