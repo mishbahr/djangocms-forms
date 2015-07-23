@@ -8,8 +8,8 @@ from django.contrib.auth.admin import csrf_protect_m
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.template.response import TemplateResponse
 from django.template.defaultfilters import slugify, yesno
+from django.template.response import TemplateResponse
 from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
