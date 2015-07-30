@@ -13,8 +13,8 @@
             server_error: 'We\'re sorry. Something Unexpected Happened. Please Try Again Later.'
         };
 
-        this.each(function(options) {
-            var options = $.extend( {}, defaults, options) ;
+        this.each(function() {
+            options = $.extend( {}, defaults, options) ;
 
             var el = $(this),
                 form_wrapper = $(options.form_wrapper, el),
