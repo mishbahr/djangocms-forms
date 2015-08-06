@@ -5,8 +5,9 @@ from django.contrib.admin.widgets import (AdminDateWidget,
                                           FilteredSelectMultiple)
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
+from django.template import TemplateDoesNotExist
 from django.template.defaultfilters import slugify
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, get_template
 from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_ip
 from unidecode import unidecode
@@ -54,6 +55,17 @@ class FormDefinitionAdminForm(forms.ModelForm):
                 self._errors[field] = self.error_class([error_msg])
 
         return cleaned_data
+
+    def clean_form_template(self):
+        """ Check if template exists """
+        form_template = self.cleaned_data.get('form_template', '')
+        if form_template:
+            try:
+                get_template(form_template)
+            except TemplateDoesNotExist:
+                msg = _('Selected Form Template does not exist.')
+                raise forms.ValidationError(msg)
+        return form_template
 
     class Meta:
         model = FormDefinition
