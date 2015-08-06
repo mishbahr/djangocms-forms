@@ -47,7 +47,7 @@ class FormSubmission(FormView):
             return JsonResponse(response)
         else:
             messages.success(self.request, strip_tags(form.form_definition.post_submit_msg))
-            return redirect(form.redirect_url or form.cleaned_data['current_page'])
+            return redirect(form.redirect_url or form.cleaned_data['referrer'])
 
     def form_invalid(self, form, *args, **kwargs):
         if self.request.is_ajax():
@@ -58,4 +58,4 @@ class FormSubmission(FormView):
             return JsonResponse(response)
         else:
             messages.error(self.request, _(u'Invalid form data, one or more fields had errors'))
-            return redirect(form.cleaned_data['current_page'])
+            return redirect(form.cleaned_data['referrer'])
