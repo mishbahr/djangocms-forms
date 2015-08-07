@@ -124,127 +124,181 @@ class FormBuilder(forms.Form):
         return value.lower() in ('yes', 'y', 'true', 't', '1')
 
     def prepare_text(self, field):
-        kwargs = field.field_attrs()
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
         if field.placeholder_text and not field.initial:
-            kwargs.update({
-                'widget': forms.TextInput({
-                    'placeholder': field.placeholder_text
-                })
+            widget_attrs.update({
+                'placeholder': field.placeholder_text,
             })
-        return forms.CharField(**kwargs)
+
+        field_attrs.update({
+            'widget': forms.TextInput(attrs=widget_attrs)
+        })
+        return forms.CharField(**field_attrs)
 
     def prepare_textarea(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': forms.Textarea({
-                'placeholder': field.placeholder_text or '',
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        if field.placeholder_text and not field.initial:
+            widget_attrs.update({
+                'placeholder': field.placeholder_text,
             })
+
+        field_attrs.update({
+            'widget': forms.Textarea(attrs=widget_attrs)
         })
-        return forms.CharField(**kwargs)
+        return forms.CharField(**field_attrs)
 
     def prepare_email(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': forms.EmailInput({
-                'placeholder': field.placeholder_text or '',
-                'autocomplete': 'email',
-            }),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs(extra_attrs={'autocomplete': 'email'})
+
+        if field.placeholder_text and not field.initial:
+            widget_attrs.update({
+                'placeholder': field.placeholder_text,
+            })
+
+        field_attrs.update({
+            'widget': forms.EmailInput(attrs=widget_attrs),
         })
-        return forms.EmailField(**kwargs)
+        return forms.EmailField(**field_attrs)
 
     def prepare_checkbox(self, field):
-        kwargs = field.field_attrs()
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.CheckboxInput(attrs=widget_attrs)
+        })
+
         if field.initial:
-            kwargs.update({
+            field_attrs.update({
                 'initial': self.to_bool(field.initial)
             })
-        return forms.BooleanField(**kwargs)
+        return forms.BooleanField(**field_attrs)
 
     def prepare_checkbox_multiple(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': forms.CheckboxSelectMultiple(),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.CheckboxSelectMultiple(attrs=widget_attrs),
             'choices': field.get_choices(),
         })
 
         if field.initial:
-            kwargs.update({
+            field_attrs.update({
                 'initial': self.split_choices(field.initial)
             })
-        return forms.MultipleChoiceField(**kwargs)
+        return forms.MultipleChoiceField(**field_attrs)
 
     def prepare_select(self, field):
-        kwargs = field.field_attrs()
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.Select(attrs=widget_attrs)
+        })
+
         if field.choice_values:
             choice_list = field.get_choices()
             if not field.required:
                 choice_list.insert(0, ('', field.placeholder_text or _('Please select an option')))
-            kwargs.update({
+            field_attrs.update({
                 'choices': choice_list
             })
-        return forms.ChoiceField(**kwargs)
+        return forms.ChoiceField(**field_attrs)
 
     def prepare_radio(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': forms.RadioSelect(),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.RadioSelect(attrs=widget_attrs),
             'choices': field.get_choices(),
         })
-        return forms.ChoiceField(**kwargs)
+        return forms.ChoiceField(**field_attrs)
 
     def prepare_file(self, field):
-        kwargs = field.field_attrs()
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.ClearableFileInput(attrs=widget_attrs)
+        })
+
         if field.choice_values:
             regex = re.compile('[\s]*\n[\s]*')
             choices = regex.split(field.choice_values)
-            kwargs.update({
+            field_attrs.update({
                 'allowed_file_types': [i.lstrip('.').lower() for i in choices]
             })
-        return FormBuilderFileField(**kwargs)
+        return FormBuilderFileField(**field_attrs)
 
     def prepare_date(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': DateInput(),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': DateInput(attrs=widget_attrs),
         })
-        return forms.DateField(**kwargs)
+        return forms.DateField(**field_attrs)
 
     def prepare_time(self, field):
-        # @todo: needs proper widget
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': TimeInput(),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': TimeInput(attrs=widget_attrs),
         })
-        return forms.TimeField(**kwargs)
+        return forms.TimeField(**field_attrs)
 
     def prepare_hidden(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': forms.HiddenInput(),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.HiddenInput(attrs=widget_attrs),
         })
-        return forms.CharField(**kwargs)
+        return forms.CharField(**field_attrs)
 
     def prepare_number(self, field):
-        kwargs = field.field_attrs()
-        return forms.IntegerField(**kwargs)
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.NumberInput(attrs=widget_attrs)
+        })
+        return forms.IntegerField(**field_attrs)
 
     def prepare_url(self, field):
-        kwargs = field.field_attrs()
-        return forms.URLField(**kwargs)
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.URLInput(attrs=widget_attrs)
+        })
+        return forms.URLField(**field_attrs)
 
     def prepare_password(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': forms.PasswordInput(),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': forms.PasswordInput(attrs=widget_attrs),
         })
-        return forms.CharField(**kwargs)
+        return forms.CharField(**field_attrs)
 
     def prepare_phone(self, field):
-        kwargs = field.field_attrs()
-        kwargs.update({
-            'widget': TelephoneInput(),
+        field_attrs = field.build_field_attrs()
+        widget_attrs = field.build_widget_attrs()
+
+        field_attrs.update({
+            'widget': TelephoneInput(attrs=widget_attrs),
         })
-        return forms.CharField(**kwargs)
+        return forms.CharField(**field_attrs)
 
     def save(self, request):
         form_data = []

@@ -136,14 +136,37 @@ class FormField(models.Model):
     def __str__(self):
         return self.label
 
-    def field_attrs(self):
-        args = {
+    def build_field_attrs(self, extra_attrs=None):
+        """Helper function for building an attribute dictionary for form field."""
+        attrs = {}
+        if extra_attrs:
+            attrs.update(extra_attrs)
+
+        attrs = {
             'required': self.required,
             'label': self.label if self.label else '',
             'initial': self.initial if self.initial else None,
             'help_text': self.help_text,
         }
-        return args
+        return attrs
+
+    def build_widget_attrs(self, extra_attrs=None):
+        """Helper function for building an attribute dictionary for form widget."""
+        attrs = {}
+        if extra_attrs:
+            attrs.update(extra_attrs)
+
+        if (self.required and settings.DJANGOCMS_FORMS_USE_HTML5_REQUIRED
+                and 'required' not in attrs and self.field_type not in ('hidden', 'radio', )):
+            attrs['required'] = 'required'
+
+        css_classes = settings.DJANGOCMS_FORMS_WIDGET_CSS_CLASSES
+        css_classes = (attrs.get('class', ''), ) + \
+            css_classes.get('__all__', ()) + \
+            css_classes.get(self.field_type, ())
+
+        attrs['class'] = ' '.join(cls.strip() for cls in css_classes if cls.strip())
+        return attrs
 
     def get_choices(self):
         if self.choice_values:
