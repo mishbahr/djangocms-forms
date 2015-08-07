@@ -41,10 +41,8 @@
 		{% if instance.post_submit_msg %}
 			<p>{{ instance.post_submit_msg|safe }}</p>
 		{% else %}
-			{% blocktrans %}
-				<h3>Submission successful</h3>
-				<p>Thank You! Your form has been successfully submitted!</p>
-			{% endblocktrans %}
+            <h3>{% trans 'Submission successful' %}</h3>
+            <p>{% trans 'Thank You! Your form has been successfully submitted!' %}</p>
 		{% endif %}
 	</div>
 </div>
