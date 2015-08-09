@@ -25,7 +25,7 @@ readme = open('README.rst').read()
 setup(
     name='djangocms-forms',
     version=version,
-    description="""The easiest and most flexible Django CMS Form builder!""",
+    description="""The easiest and most flexible Django CMS Form builder w/ ReCaptcha v2 support!""",
     long_description=readme,
     author='Mishbah Razzaque',
     author_email='mishbahx@gmail.com',
