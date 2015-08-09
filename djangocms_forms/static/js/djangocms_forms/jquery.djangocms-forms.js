@@ -10,7 +10,7 @@
             fieldWrapper: '.field-wrapper',
             fieldErrors: '.field-errors',
 
-            errorClass: 'has-error',
+            errorClass: 'error',
             errorListClass: 'errorlist',
             ajaxErrorMsg: 'We\'re sorry. Something Unexpected Happened. Please Try Again Later.',
 
