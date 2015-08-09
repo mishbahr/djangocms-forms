@@ -101,6 +101,14 @@ class FormDefinition(CMSPlugin):
             slugify(unidecode(self.name)).replace('_', '-'),
             self.plugin_reference_id)
 
+    @property
+    def use_honeypot(self):
+        return self.spam_protection == 1
+
+    @property
+    def use_recaptcha(self):
+        return self.spam_protection == 2
+
     def copy_relations(self, oldinstance):
         for field in oldinstance.fields.all():
             field.pk = None

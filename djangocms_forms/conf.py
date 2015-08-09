@@ -51,6 +51,9 @@ class DjangoCMSFormsConf(AppConf):
 
     DEFAULT_SPAM_PROTECTION = 0
 
+    RECAPTCHA_PUBLIC_KEY = ''
+    RECAPTCHA_SECRET_KEY = ''
+
     TEMPLATES = (
         ('djangocms_forms/form_template/default.html', _('Default')),
     )

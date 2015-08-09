@@ -41,8 +41,8 @@ class FormSubmission(FormView):
 
         if self.request.is_ajax():
             response = {
-                'status': 'success',
-                'redirect_url': form.redirect_url
+                'formIsValid': True,
+                'redirectUrl': form.redirect_url
             }
             return JsonResponse(response)
         else:
@@ -52,8 +52,8 @@ class FormSubmission(FormView):
     def form_invalid(self, form, *args, **kwargs):
         if self.request.is_ajax():
             response = {
-                'status': 'error',
-                'form_errors': form.errors,
+                'formIsValid': False,
+                'errors': form.errors,
             }
             return JsonResponse(response)
         else:

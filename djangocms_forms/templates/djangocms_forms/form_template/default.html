@@ -12,7 +12,7 @@
 		<form action="{{ form.submission_url }}" method="POST" enctype="multipart/form-data">
 			<div class="form-errors" style="display:none;"></div>
 			{% for field in form.visible_fields %}
-				<div class="field-wrapper {{ field|input_class }} {{ field.css_classes }}">
+				<div class="field-wrapper {{ field|input_class }} {{ field.css_classes }}{% if field|is_honeypot %} visuallyhidden{% endif %}">
                     <div class="field-errors" style="display:none;"></div>
 					{% if field|is_checkbox %}
 						{{ field }}
@@ -47,12 +47,23 @@
 	</div>
 </div>
 
+{% addtoblock "css" %}
+    {% if instance.use_honeypot %}
+        <style type="text/css">
+            .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+        </style>
+    {% endif %}
+{% endaddtoblock %}
 {% addtoblock "js" %}
+    {% if instance.use_recaptcha %}
+        <script src="https://www.google.com/recaptcha/api.js?onload=reCapctchaOnloadCallback&render=explicit" async defer></script>
+    {% endif %}
 	<script src="{% static 'js/djangocms_forms/libs/jquery.form.min.js' %}"></script>
-	<script src="{% static 'js/djangocms_forms/djangocms_forms.js' %}"></script>
+	<script src="{% static 'js/djangocms_forms/jquery.djangocms-forms.js' %}"></script>
+
 	<script type="application/javascript">
 		$(function() {
-           $('.forms').djangocms_forms();
+		  $('.forms').cmsForms({'reCaptchaSiteKey': '{{ recaptcha_site_key }}'});
 		});
 	</script>
 {% endaddtoblock %}

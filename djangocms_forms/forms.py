@@ -1,8 +1,8 @@
 import re
 
 from django import forms
-from django.contrib.admin.widgets import (AdminDateWidget,
-                                          FilteredSelectMultiple)
+from django.contrib.admin.widgets import (
+    AdminDateWidget, FilteredSelectMultiple)
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.template import TemplateDoesNotExist
@@ -12,7 +12,9 @@ from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_ip
 from unidecode import unidecode
 
-from .fields import FormBuilderFileField, MultipleChoiceAutoCompleteField
+from .fields import (
+    FormBuilderFileField, HoneyPotField,
+    MultipleChoiceAutoCompleteField, ReCaptchaField)
 from .models import Form, FormDefinition, FormField, FormSubmission
 from .utils import int_to_hashid
 from .widgets import DateInput, TelephoneInput, TimeInput
@@ -99,6 +101,12 @@ class FormBuilder(forms.Form):
 
                 if isinstance(form_field, FormBuilderFileField):
                     self.file_fields.append(field_name)
+
+        if form_definition.use_honeypot:
+            self.fields['__toc__'] = HoneyPotField()
+        elif form_definition.use_recaptcha:
+            field_name = 'recaptcha_%s' % int_to_hashid(form_definition.pk, min_length=8)
+            self.fields[field_name] = ReCaptchaField(label=_('Are you a robot?'))
 
     def get_unique_field_name(self, field):
         field_name = '%s' % (slugify(unidecode(field.label)).replace('-', '_'))

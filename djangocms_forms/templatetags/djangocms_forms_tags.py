@@ -4,6 +4,9 @@ from django.utils.safestring import mark_safe
 from django.utils.six import string_types
 from django.utils.translation import ugettext_lazy as _
 
+from djangocms_forms.fields import HoneyPotField
+
+
 register = template.Library()
 
 
@@ -35,6 +38,11 @@ def is_checkboxselectmultiple(field):
 @register.filter
 def is_file(field):
     return isinstance(field.field.widget, forms.ClearableFileInput)
+
+
+@register.filter
+def is_honeypot(field):
+    return isinstance(field.field, HoneyPotField)
 
 
 @register.filter

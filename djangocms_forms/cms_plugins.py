@@ -87,7 +87,7 @@ class FormPlugin(CMSPluginBase):
                                'an email address to have the form submissions emailed to you or '
                                'log all the form submissions to the database.',
                 'fields': ('email_to', 'email_from', 'email_subject',
-                           'email_uploaded_files', 'save_data', ),
+                           'email_uploaded_files', 'save_data', 'spam_protection', ),
             }),
         )
         return fieldsets
@@ -109,7 +109,8 @@ class FormPlugin(CMSPluginBase):
             label_suffix='', auto_id='%s')
 
         context.update({
-            'form': form
+            'form': form,
+            'recaptcha_site_key': settings.DJANGOCMS_FORMS_RECAPTCHA_PUBLIC_KEY,
         })
         return context
 

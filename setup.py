@@ -41,6 +41,7 @@ setup(
         'unidecode',
         'tablib',
         'hashids',
+        'requests',
         'django-cms>=3.0',
     ],
     license="BSD",
