@@ -1,6 +1,8 @@
 import logging
 import os
 
+import requests
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -8,11 +10,8 @@ from django.db.models import SET_NULL
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 
-import requests
-
 from .conf import settings
 from .widgets import ReCaptchaWidget
-
 
 logger = logging.getLogger('djangocms_forms')
 

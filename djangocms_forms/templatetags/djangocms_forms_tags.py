@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from djangocms_forms.fields import HoneyPotField
 
-
 register = template.Library()
 
 
