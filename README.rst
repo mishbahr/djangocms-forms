@@ -42,7 +42,7 @@ Quickstart
 
     python manage.py migrate
 
-4. Add ``djangocms_forms.urls`` to your project's ``urls`` module::
+4. Add ``djangocms_forms.urls`` to your project's ``urls`` module or create a django CMS page to hook the application into. In ``Advanced Settings``, set its Application to ``Django CMS Forms`` (this requires a server restart)::
 
     urlpatterns = patterns(
         ...
@@ -50,7 +50,46 @@ Quickstart
         ...
     )
 
+5. To use reCAPTCHA for spam protection, you need to sign up for an API key pair for your site::
 
+    DJANGOCMS_FORMS_RECAPTCHA_PUBLIC_KEY = '<recaptcha_site_key>'
+    DJANGOCMS_FORMS_RECAPTCHA_SECRET_KEY = '<recaptcha_secret_key>'
+
+You can register a new site via https://www.google.com/recaptcha/admin
+
+
+
+Configuration
+--------------
+
+Plugin(s) Module - If module is None, plugin is grouped Generic group::
+
+    DJANGOCMS_FORMS_PLUGIN_MODULE = _('Generic')
+
+Name of the plugin::
+
+    DJANGOCMS_FORMS_PLUGIN_NAME = _('Form')
+
+The path to the default template used to render the template::
+
+   DJANGOCMS_FORMS_DEFAULT_TEMPLATE = 'djangocms_forms/form_template/default.html'
+
+or override the ``Form Template`` dropdown choices to have different template options::
+
+    DJANGOCMS_FORMS_TEMPLATES = (
+        ('djangocms_forms/form_template/default.html', _('Default')),
+    )
+
+HTML5 required - When set to True all required fields inputs will be rendered with HTML5 ``required=required`` attribute::
+
+    DJANGOCMS_FORMS_USE_HTML5_REQUIRED = False
+
+
+By default, ``djangocms-forms`` adds additional css classes to all form inputs. e.g. a ``Text`` field generates an ``<input class="textinput">`` You can override this to integrate your own CSS framework::
+
+    DJANGOCMS_FORMS_WIDGET_CSS_CLASSES = {'__all__': ('form-control', ) }
+
+e.g. the above setting would generate ``<input class"form-control" ....`` for all fields.
 
 
 Preview
