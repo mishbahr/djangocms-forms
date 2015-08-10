@@ -1,0 +1,6 @@
+{
+    "package-name": "djangocms-forms2",
+    "installed-apps": [
+        "djangocms_forms"
+    ]
+}
