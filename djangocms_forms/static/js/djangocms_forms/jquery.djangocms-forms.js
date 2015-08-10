@@ -11,10 +11,11 @@
             fieldErrors: '.field-errors',
 
             errorClass: 'error',
-            errorListClass: 'errorlist',
+            errorList: '<ul class="errorlist"></ul>',
+            errorItem: '<li></li>',
             ajaxErrorMsg: 'We\'re sorry. Something Unexpected Happened. Please Try Again Later.',
 
-            reCaptchaSiteKey: null,
+            reCaptchaSiteKey: '',
             reCaptchaTheme: 'light',
             reCaptchaSize: 'normal'
         };
@@ -70,10 +71,8 @@
         ajaxError: function() {
             this.resetForm();
 
-            var formErrors = $('<ul/>').addClass(this.settings.errorListClass);
-            $('<li>', {
-                html: this.settings.ajaxErrorMsg
-            }).appendTo(formErrors);
+            var formErrors = $(this.settings.errorList);
+            $(this.settings.errorItem).html(this.settings.ajaxErrorMsg).appendTo(formErrors);
             this.form.find(this.settings.formErrors).append(formErrors).fadeIn('slow');
         },
         resetForm: function() {
@@ -100,12 +99,10 @@
             $.each(response.errors, function(name, errorList) {
                 if (name == '__all__') {
                     // NON_FIELD_ERRORS
-                    var formErrors = $('<ul/>').addClass(this.settings.errorListClass);
+                    var formErrors = $(this.settings.errorList);
                     errorList.forEach(function(error) {
-                        $('<li>', {
-                            text: error
-                        }).appendTo(formErrors);
-                    });
+                        $(this.settings.errorItem).text(error).appendTo(formErrors);
+                    }.bind(this));
                     this.form.find(this.settings.formErrors).append(formErrors).fadeIn('slow');
                 } else {
                     var isRecapcha = name.match('^recaptcha');
@@ -113,14 +110,10 @@
                     var formField = this.form.find(formInput).first();
                     var fieldWrapper = formField.parents(this.settings.fieldWrapper).addClass(this.settings.errorClass);
 
-                    var fieldErrors = $('<ul/>').addClass(this.settings.errorListClass);
-
+                    var fieldErrors = $(this.settings.errorList);
                     errorList.forEach(function(error) {
-                        $('<li>', {
-                            text: error
-                        }).appendTo(fieldErrors);
-                    });
-
+                        $(this.settings.errorItem).text(error).appendTo(fieldErrors);
+                    }.bind(this));
                     fieldWrapper.find(this.settings.fieldErrors).append(fieldErrors).fadeIn('slow');
                 }
             }.bind(this));
