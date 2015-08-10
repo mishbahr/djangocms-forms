@@ -168,7 +168,27 @@ class FormField(models.Model):
                 and 'required' not in attrs and self.field_type not in ('hidden', 'radio', )):
             attrs['required'] = 'required'
 
-        css_classes = settings.DJANGOCMS_FORMS_WIDGET_CSS_CLASSES
+        css_classes = {
+            '__all__': (),
+            'text': ('textinput',),
+            'textarea': ('textarea', ),
+            'email': ('emailinput', ),
+            'number': ('integerfield', ),
+            'phone': ('telephoneinput', ),
+            'url': ('urlfield', ),
+            'checkbox': ('booleanfield',),
+            'checkbox_multiple': ('checkboxselectmultiple', ),
+            'select': ('choicefield', ),
+            'radio': ('radioselect', ),
+            'file': ('filefield', ),
+            'date': ('dateinput', ),
+            'time': ('timeinput', ),
+            'password': ('passwordinput', ),
+            'hidden': ('hiddeninput', ),
+        }
+
+        css_classes.update(settings.DJANGOCMS_FORMS_WIDGET_CSS_CLASSES)
+
         css_classes = (attrs.get('class', ''), ) + \
             css_classes.get('__all__', ()) + \
             css_classes.get(self.field_type, ())

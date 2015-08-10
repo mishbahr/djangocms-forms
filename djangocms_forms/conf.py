@@ -67,24 +67,7 @@ class DjangoCMSFormsConf(AppConf):
 
     USE_HTML5_REQUIRED = False
 
-    WIDGET_CSS_CLASSES = {
-        '__all__': (),
-        'text': ('textinput',),
-        'textarea': ('textarea', ),
-        'email': ('emailinput', ),
-        'number': ('integerfield', ),
-        'phone': ('telephoneinput', ),
-        'url': ('urlfield', ),
-        'checkbox': ('booleanfield',),
-        'checkbox_multiple': ('checkboxselectmultiple', ),
-        'select': ('choicefield', ),
-        'radio': ('radioselect', ),
-        'file': ('filefield', ),
-        'date': ('dateinput', ),
-        'time': ('timeinput', ),
-        'password': ('passwordinput', ),
-        'hidden': ('hiddeninput', ),
-    }
+    WIDGET_CSS_CLASSES = {}
 
     class Meta:
         prefix = 'djangocms_forms'
