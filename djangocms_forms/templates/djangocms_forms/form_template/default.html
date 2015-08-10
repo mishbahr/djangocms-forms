@@ -9,7 +9,7 @@
 		</div>
 	{% endif %}
 	<div class="form-wrapper">
-		<form action="{{ form.submission_url }}" method="POST" enctype="multipart/form-data">
+		<form action="{{ form.submission_url }}" method="POST" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
 			<div class="form-errors" style="display:none;"></div>
 			{% for field in form.visible_fields %}
 				<div class="field-wrapper {{ field|input_class }} {{ field.css_classes }}{% if field|is_honeypot %} visuallyhidden{% endif %}">
