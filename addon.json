@@ -1,5 +1,5 @@
 {
-    "package-name": "djangocms-forms2",
+    "package-name": "djangocms-forms",
     "installed-apps": [
         "djangocms_forms"
     ]
