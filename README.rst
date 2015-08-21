@@ -122,6 +122,7 @@ Preview
   :width: 768px
   :align: center
 
+
 You may also like...
 --------------------
 
@@ -129,3 +130,4 @@ You may also like...
 * djangocms-instagram — https://github.com/mishbahr/djangocms-instagram
 * djangocms-responsive-wrapper — https://github.com/mishbahr/djangocms-responsive-wrapper
 * djangocms-twitter2 — https://github.com/mishbahr/djangocms-twitter2
+* djangocms-youtube - https://github.com/mishbahr/djangocms-youtube
