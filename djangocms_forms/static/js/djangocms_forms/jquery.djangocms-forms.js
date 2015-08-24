@@ -38,8 +38,8 @@
                 error: $.proxy(this.ajaxError, this)
             };
             this.form.on('submit', function(e) {
-                $(this).ajaxSubmit(ajaxOptions);
                 e.preventDefault();
+                $(this).ajaxSubmit(ajaxOptions);
             });
 
             if (typeof(grecaptcha) == 'undefined') {
