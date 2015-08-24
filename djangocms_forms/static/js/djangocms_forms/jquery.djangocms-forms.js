@@ -37,9 +37,9 @@
                 success: $.proxy(this.ajaxSuccess, this),
                 error: $.proxy(this.ajaxError, this)
             };
-            this.form.on('submit', function() {
+            this.form.on('submit', function(e) {
                 $(this).ajaxSubmit(ajaxOptions);
-                return false;
+                e.preventDefault();
             });
 
             if (typeof(grecaptcha) == 'undefined') {
