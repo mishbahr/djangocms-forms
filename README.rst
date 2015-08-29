@@ -44,7 +44,7 @@ Quickstart
 
     python manage.py migrate
 
-4. Add ``djangocms_forms.urls`` to your project's ``urls`` module or create a django CMS page to hook the application into. In ``Advanced Settings``, set its Application to ``Django CMS Forms`` (this requires a server restart)::
+4. Add ``djangocms_forms.urls`` to your project's ``urls`` module or create a django CMS page to hook the application into. In ``Advanced Settings``, set its Application to ``Forms`` (this requires a server restart)::
 
     urlpatterns = patterns(
         ...
