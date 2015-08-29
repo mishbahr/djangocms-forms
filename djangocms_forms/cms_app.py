@@ -7,7 +7,7 @@ from cms.apphook_pool import apphook_pool
 
 
 class DjangoCMSFormsApphook(CMSApp):
-    name = _('Django CMS Forms')
+    name = _('Forms')
     urls = ['djangocms_forms.urls']
 
 apphook_pool.register(DjangoCMSFormsApphook)
