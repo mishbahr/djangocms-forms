@@ -127,6 +127,7 @@ You may also like...
 --------------------
 
 * djangocms-disqus - https://github.com/mishbahr/djangocms-disqus
+* djangocms-fbcomments - https://github.com/mishbahr/djangocms-fbcomments
 * djangocms-gmaps — https://github.com/mishbahr/djangocms-gmaps
 * djangocms-instagram — https://github.com/mishbahr/djangocms-instagram
 * djangocms-responsive-wrapper — https://github.com/mishbahr/djangocms-responsive-wrapper
