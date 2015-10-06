@@ -1,8 +1,7 @@
 import re
 
 from django import forms
-from django.contrib.admin.widgets import (AdminDateWidget,
-                                          FilteredSelectMultiple)
+from django.contrib.admin.widgets import AdminDateWidget, FilteredSelectMultiple
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.template import TemplateDoesNotExist
@@ -12,8 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_ip
 from unidecode import unidecode
 
-from .fields import (FormBuilderFileField, HoneyPotField,
-                     MultipleChoiceAutoCompleteField, ReCaptchaField)
+from .fields import FormBuilderFileField, HoneyPotField, MultipleChoiceAutoCompleteField, ReCaptchaField
 from .models import Form, FormDefinition, FormField, FormSubmission
 from .utils import int_to_hashid
 from .widgets import DateInput, TelephoneInput, TimeInput

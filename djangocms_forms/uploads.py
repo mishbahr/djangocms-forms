@@ -5,8 +5,8 @@ import uuid
 from django.core.files.base import File
 from django.core.files.storage import get_storage_class
 from django.db.models.fields.files import FieldFile
-from django.utils.functional import LazyObject
 from django.utils.encoding import force_bytes
+from django.utils.functional import LazyObject
 
 from .conf import settings
 
