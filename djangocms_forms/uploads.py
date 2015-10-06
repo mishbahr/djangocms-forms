@@ -6,6 +6,7 @@ from django.core.files.base import File
 from django.core.files.storage import get_storage_class
 from django.db.models.fields.files import FieldFile
 from django.utils.functional import LazyObject
+from django.utils.encoding import force_bytes
 
 from .conf import settings
 
@@ -20,7 +21,8 @@ file_storage = FileStorage()
 def handle_uploaded_files(form):
     files = []
     if len(form.file_fields):
-        secret_hash = hashlib.sha1(str(uuid.uuid4()).encode('utf-8')).hexdigest()
+        generated_uuid = uuid.uuid4()
+        secret_hash = hashlib.sha1(force_bytes(generated_uuid)).hexdigest()
         for field in form.file_fields:
             uploaded_file = form.cleaned_data.get(field, None)
             if uploaded_file is None:
