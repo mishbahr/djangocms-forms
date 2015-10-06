@@ -20,7 +20,7 @@ file_storage = FileStorage()
 def handle_uploaded_files(form):
     files = []
     if len(form.file_fields):
-        secret_hash = hashlib.sha1(str(uuid.uuid4())).hexdigest()
+        secret_hash = hashlib.sha1(str(uuid.uuid4()).encode('utf-8')).hexdigest()
         for field in form.file_fields:
             uploaded_file = form.cleaned_data.get(field, None)
             if uploaded_file is None:
