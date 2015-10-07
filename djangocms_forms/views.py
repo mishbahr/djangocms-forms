@@ -32,7 +32,7 @@ class FormSubmission(FormView):
         return form_kwargs
 
     def form_valid(self, form, *args, **kwargs):
-        form.files = handle_uploaded_files(form)
+        handle_uploaded_files(form)
         form.save(request=self.request)
         form_submission.send(
             sender=self.__class__,

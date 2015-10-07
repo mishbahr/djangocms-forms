@@ -355,8 +355,11 @@ class FormBuilder(forms.Form):
         email.attach_alternative(message_html, 'text/html')
 
         if self.files and self.form_definition.email_uploaded_files:
-            for file_path in self.files:
-                email.attach_file(file_path)
+            for field, filedata in self.files.items():
+                filedata.open('r')
+                content = filedata.read()
+                filedata.close()
+                email.attach(filedata.name, content, filedata.content_type)
 
         email.send(fail_silently=False)
 
