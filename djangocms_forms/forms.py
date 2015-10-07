@@ -363,7 +363,10 @@ class FormBuilder(forms.Form):
                     if getattr(uploaded_file, 'path', None):
                         email.attach_file(uploaded_file.path)
                     else:
-                        email.attach(uploaded_file.name, uploaded_file.read(),
+                        uploaded_file.open('r')
+                        content = uploaded_file.read()
+                        uploaded_file.close()
+                        email.attach(uploaded_file.name, content,
                                      uploaded_file.content_type)
 
         email.send(fail_silently=False)
