@@ -20,14 +20,14 @@ file_storage = FileStorage()
 
 def handle_uploaded_files(form):
     if len(form.file_fields):
-        generated_uuid = uuid.uuid4()
-        secret_hash = hashlib.sha1(force_bytes(generated_uuid)).hexdigest()
         for field in form.file_fields:
             uploaded_file = form.cleaned_data.get(field, None)
             if uploaded_file is None:
                 continue
+
             valid_file_name = file_storage.get_valid_name(uploaded_file.name)
             root, ext = os.path.splitext(valid_file_name)
+            secret_hash = hashlib.sha1(force_bytes(uuid.uuid4())).hexdigest()
             filename = file_storage.get_available_name(os.path.join(
                 settings.DJANGOCMS_FORMS_FILE_STORAGE_DIR,
                 form.form_definition.upload_to,
