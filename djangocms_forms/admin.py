@@ -13,6 +13,7 @@ from django.template.response import TemplateResponse
 from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
+from django.utils.text import Truncator
 from django.utils.translation import ugettext_lazy as _
 from tablib import Dataset
 
@@ -162,8 +163,8 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                 return redirect('admin:%s_%s_export' % info)
 
             latest_submission = queryset[:1].get()
-            dataset = Dataset(title=latest_submission.plugin.name)
-
+            dataset = Dataset(title=Truncator(latest_submission.plugin.name).chars(31))
+            
             if not headers:
                 headers = [field['label'].strip() for field in latest_submission.form_data]
                 for submission in queryset:
