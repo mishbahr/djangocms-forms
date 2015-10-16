@@ -164,7 +164,7 @@ class FormSubmissionAdmin(admin.ModelAdmin):
 
             latest_submission = queryset[:1].get()
             dataset = Dataset(title=Truncator(latest_submission.plugin.name).chars(31))
-            
+
             if not headers:
                 headers = [field['label'].strip() for field in latest_submission.form_data]
                 for submission in queryset:
