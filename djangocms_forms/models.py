@@ -54,6 +54,11 @@ class FormDefinition(CMSPlugin):
     external_redirect = models.URLField(
         _('External URL'), blank=True,
         help_text=_('e.g. http://example.com/thank-you'))
+    redirect_delay = models.PositiveIntegerField(
+        _('Redirect Delay'), blank=True, null=True,
+        help_text=_('Wait this number of milliseconds before redirecting. '
+            '1000 milliseconds = 1 second.')
+    )
 
     # Email
     email_to = models.CharField(
