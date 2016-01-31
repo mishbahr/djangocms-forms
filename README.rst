@@ -93,11 +93,11 @@ By default, ``djangocms-forms`` adds additional css classes to all form inputs. 
 
 e.g. the above setting would generate ``<input class"form-control" ....`` for all fields.
 
-By default, djangocms-forms will redirect a successful form submission after 1000 milliseconds (1 second). You may provide your own redirect delay value for all forms site-wide via settings:
+By default, djangocms-forms will redirect a successful form submission after 1000 milliseconds (1 second). You may provide your own redirect delay value for all forms site-wide via settings::
 
     DJANGOCMS_FORMS_REDIRECT_DELAY = 10000  # 10 seconds
 
-or on a per-form basis via the ``redirect_delay`` field. The order of precedence for the redirect value is always:
+or on a per-form basis via the ``redirect_delay`` field. The order of precedence for the redirect value is always::
 
     instance.redirect_delay > DJANGOCMS_FORMS_REDIRECT_DELAY > 1000 (default)
 
@@ -135,6 +135,7 @@ You may also like...
 --------------------
 
 * djangocms-disqus - https://github.com/mishbahr/djangocms-disqus
+* djangocms-embed - https://github.com/mishbahr/djangocms-embed
 * djangocms-fbcomments - https://github.com/mishbahr/djangocms-fbcomments
 * djangocms-gmaps — https://github.com/mishbahr/djangocms-gmaps
 * djangocms-instagram — https://github.com/mishbahr/djangocms-instagram
