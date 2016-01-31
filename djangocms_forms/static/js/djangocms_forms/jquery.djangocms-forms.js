@@ -17,7 +17,11 @@
 
             reCaptchaSiteKey: '',
             reCaptchaTheme: 'light',
-            reCaptchaSize: 'normal'
+            reCaptchaSize: 'normal',
+
+            // needed in case someone overrides the template and doesn't pass
+            // in the value when initializing the cmsForms object
+            redirectDelay: 1000
         };
 
     function CMSForms(el, options) {
@@ -90,7 +94,7 @@
             if (response.redirectUrl) {
                 setTimeout(function() {
                     window.location = response.redirectUrl;
-                }, 1000);
+                }, this.settings.redirectDelay);
             }
         },
         formInvalid: function(response) {

@@ -53,6 +53,18 @@ class FormDefinitionAdminForm(forms.ModelForm):
             for field in storage_fields:
                 self._errors[field] = self.error_class([error_msg])
 
+        # if a rediret_delay is specified, ensure there is either a page_redirect
+        # or external_redirect present
+        page_redirect = cleaned_data.get('page_redirect')
+        external_redirect = cleaned_data.get('external_redirect')
+        redirect_delay = cleaned_data.get('redirect_delay')
+
+        if redirect_delay and not any([page_redirect, external_redirect]):
+            self._errors['redirect_delay'] = self.error_class([
+                _('You must specify either a page or external redirect when '
+                'adding a redirect delay.')
+            ])
+
         return cleaned_data
 
     def clean_form_template(self):

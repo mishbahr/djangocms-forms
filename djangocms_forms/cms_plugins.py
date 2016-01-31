@@ -79,7 +79,7 @@ class FormPlugin(CMSPluginBase):
                 'fields': ('post_submit_msg', )
             }),
             (None, {
-                'fields': ('success_redirect', ('page_redirect', 'external_redirect'), ),
+                'fields': ('success_redirect', ('page_redirect', 'external_redirect'), 'redirect_delay',),
             }),
             (None, {
                 'description': '<strong>Submission Settings</strong> &mdash; '
@@ -108,9 +108,13 @@ class FormPlugin(CMSPluginBase):
             initial={'referrer': request.path_info}, form_definition=instance,
             label_suffix='', auto_id='%s')
 
+        redirect_delay = instance.redirect_delay or \
+            getattr(settings, 'DJANGOCMS_FORMS_REDIRECT_DELAY', 1000)
+
         context.update({
             'form': form,
             'recaptcha_site_key': settings.DJANGOCMS_FORMS_RECAPTCHA_PUBLIC_KEY,
+            'redirect_delay': redirect_delay
         })
         return context
 
