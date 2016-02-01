@@ -1,11 +1,16 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
 import re
 
-from cms.models import CMSPlugin
-from cms.models.fields import PageField
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+
+from cms.models import CMSPlugin
+from cms.models.fields import PageField
 from jsonfield import JSONField
 from unidecode import unidecode
 
@@ -57,7 +62,7 @@ class FormDefinition(CMSPlugin):
     redirect_delay = models.PositiveIntegerField(
         _('Redirect Delay'), blank=True, null=True,
         help_text=_('Wait this number of milliseconds before redirecting. '
-            '1000 milliseconds = 1 second.')
+                    '1000 milliseconds = 1 second.')
     )
 
     # Email

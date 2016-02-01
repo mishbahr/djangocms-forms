@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
 import re
 
 from django import forms
@@ -8,6 +12,7 @@ from django.template import TemplateDoesNotExist
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template, render_to_string
 from django.utils.translation import ugettext_lazy as _
+
 from ipware.ip import get_ip
 from unidecode import unidecode
 
@@ -62,7 +67,7 @@ class FormDefinitionAdminForm(forms.ModelForm):
         if redirect_delay and not any([page_redirect, external_redirect]):
             self._errors['redirect_delay'] = self.error_class([
                 _('You must specify either a page or external redirect when '
-                'adding a redirect delay.')
+                    'adding a redirect delay.')
             ])
 
         return cleaned_data

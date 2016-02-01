@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.html import strip_tags
