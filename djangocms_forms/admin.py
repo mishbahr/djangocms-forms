@@ -26,9 +26,15 @@ from .forms import SubmissionExportForm
 from .models import Form, FormSubmission
 
 try:
+    from django.contrib.admin.options import IS_POPUP_VAR
+except ImportError:
+    IS_POPUP_VAR = '_popup'
+
+try:
     from django.contrib.admin.utils import unquote
 except ImportError:
     from django.contrib.admin.util import unquote
+
 
 try:
     from django.http import JsonResponse
@@ -243,7 +249,7 @@ class FormSubmissionAdmin(admin.ModelAdmin):
         context = {
             'title': _('Export %s') % force_text(self.opts.verbose_name_plural),
             'adminform': adminform,
-            'is_popup': '_popup' in request.REQUEST,
+            'is_popup': (IS_POPUP_VAR in request.POST or IS_POPUP_VAR in request.GET),
             'media': mark_safe(media),
             'errors': AdminErrorList(form, ()),
             'app_label': self.opts.app_label,
