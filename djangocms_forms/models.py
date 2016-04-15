@@ -210,7 +210,7 @@ class FormField(models.Model):
         if self.choice_values:
             regex = re.compile('[\s]*\n[\s]*')
             choices = regex.split(self.choice_values)
-            return [(str(choice), str(choice)) for choice in choices]
+            return [(choice, choice) for choice in choices]
 
 
 @python_2_unicode_compatible
