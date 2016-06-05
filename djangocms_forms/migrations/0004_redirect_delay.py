@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='formdefinition',
             name='redirect_delay',
-            field=models.PositiveIntegerField(verbose_name='Redirect Delay', blank=True, null=True, help_text="Wait this number of milliseconds before redirecting."),
+            field=models.PositiveIntegerField(verbose_name='Redirect Delay', blank=True, null=True, help_text="Wait this number of milliseconds before redirecting. 1000 milliseconds = 1 second."),
         ),
     ]
