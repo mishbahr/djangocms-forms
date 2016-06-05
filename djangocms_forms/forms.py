@@ -121,9 +121,11 @@ class FormBuilder(forms.Form):
         elif form_definition.use_recaptcha:
             field_name = 'recaptcha_%s' % int_to_hashid(form_definition.pk, min_length=8)
             self.fields[field_name] = ReCaptchaField(label=_('Are you a robot?'))
-
+            
     def get_unique_field_name(self, field):
-        field_name = '%s' % (slugify(unidecode(field.label)).replace('-', '_'))
+        field_name = field.field_name or field.label
+        field_name = '%s' % (slugify(unidecode(field_name).replace('-', '_')))
+
         if field_name in self.field_names:
             i = 1
             while True:

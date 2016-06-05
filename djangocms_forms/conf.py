@@ -72,5 +72,7 @@ class DjangoCMSFormsConf(AppConf):
 
     WIDGET_CSS_CLASSES = {}
 
+    ALLOW_CUSTOM_FIELD_NAME = True
+
     class Meta:
         prefix = 'djangocms_forms'

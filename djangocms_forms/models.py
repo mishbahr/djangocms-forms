@@ -134,6 +134,7 @@ class FormField(models.Model):
         choices=settings.DJANGOCMS_FORMS_FIELD_TYPES,
         default=settings.DJANGOCMS_FORMS_DEFAULT_FIELD_TYPE)
     label = models.CharField(_('name'), max_length=255)
+    field_name = models.CharField(_('Custom Field Name'), max_length=255, blank=True)
     placeholder_text = models.CharField(_('Placeholder Text'), blank=True, max_length=100)
     required = models.BooleanField(_('Required'), default=True)
     help_text = models.TextField(

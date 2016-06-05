@@ -20,13 +20,6 @@ class FormFieldInline(admin.StackedInline):
     model = FormField
     form = FormFieldInlineForm
     extra = 0
-    fieldsets = (
-        (None, {
-            'fields': (('label', 'field_type', 'required'),
-                       'initial', 'placeholder_text', 'help_text',
-                       'choice_values', 'position', )
-        }),
-    )
 
     formfield_overrides = {
         models.TextField: {
@@ -34,6 +27,23 @@ class FormFieldInline(admin.StackedInline):
                 attrs={'rows': 4, 'cols': 50})
         },
     }
+
+    def get_fieldsets(self, request, obj=None):
+        fields = (
+            ('label', 'field_type', 'required'),
+            'initial', 'placeholder_text', 'help_text', 
+            'choice_values', 'position', 
+        )
+
+        if settings.DJANGOCMS_FORMS_ALLOW_CUSTOM_FIELD_NAME:
+            fields = fields + ('field_name', )
+
+        fieldsets = (
+            (None, {
+                'fields': fields
+            }),
+        )
+        return fieldsets
 
     class Media:
         css = {
