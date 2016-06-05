@@ -1,6 +1,6 @@
-=============================
+================
 djangocms-forms
-=============================
+================
 
 .. image:: http://img.shields.io/travis/mishbahr/djangocms-forms.svg?style=flat-square
     :target: https://travis-ci.org/mishbahr/djangocms-forms/
@@ -137,8 +137,8 @@ You may also like...
 * djangocms-disqus - https://github.com/mishbahr/djangocms-disqus
 * djangocms-embed - https://github.com/mishbahr/djangocms-embed
 * djangocms-fbcomments - https://github.com/mishbahr/djangocms-fbcomments
-* djangocms-gmaps — https://github.com/mishbahr/djangocms-gmaps
-* djangocms-instagram — https://github.com/mishbahr/djangocms-instagram
-* djangocms-responsive-wrapper — https://github.com/mishbahr/djangocms-responsive-wrapper
-* djangocms-twitter2 — https://github.com/mishbahr/djangocms-twitter2
-* djangocms-youtube — https://github.com/mishbahr/djangocms-youtube
+* djangocms-gmaps - https://github.com/mishbahr/djangocms-gmaps
+* djangocms-instagram - https://github.com/mishbahr/djangocms-instagram
+* djangocms-responsive-wrapper - https://github.com/mishbahr/djangocms-responsive-wrapper
+* djangocms-twitter2 - https://github.com/mishbahr/djangocms-twitter2
+* djangocms-youtube - https://github.com/mishbahr/djangocms-youtube
