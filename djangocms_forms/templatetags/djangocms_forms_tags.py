@@ -3,6 +3,7 @@ from django.template.defaultfilters import yesno
 from django.utils.safestring import mark_safe
 from django.utils.six import string_types
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_text
 
 from djangocms_forms.fields import HoneyPotField
 
@@ -75,7 +76,7 @@ def friendly(value):
     if type(value) is bool:
         value = yesno(value, u'{0},{1}'.format(_('Yes'), _('No')))
     if not isinstance(value, string_types):
-        value = unicode(value)
+        value = force_text(value)
     return value
 
 
