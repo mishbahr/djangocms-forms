@@ -190,7 +190,7 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                     }
                     return JsonResponse(data)
 
-            headers.extend(['Submitted on', 'Sender IP', 'Referrer URL'])
+            headers.extend(['Submitted By', 'Submitted on', 'Sender IP', 'Referrer URL'])
             dataset.headers = headers
 
             def humanize(field):
@@ -212,6 +212,8 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                     label = field['label'].strip()
                     if label in headers:
                         row[headers.index(label)] = humanize(field)
+
+                    row[-4] = force_text(submission.created_by or _('Unknown')) 
                     row[-3] = submission.creation_date.strftime(
                         settings.DJANGOCMS_FORMS_DATETIME_FORMAT)
                     row[-2] = submission.ip
