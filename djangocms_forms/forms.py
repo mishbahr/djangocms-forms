@@ -375,7 +375,7 @@ class FormBuilder(forms.Form):
 
         if self.form_definition.email_uploaded_files:
             for field, filedata in self.files.items():
-                filedata.open('r')
+                filedata.open('rb')
                 content = filedata.read()
                 filedata.close()
                 email.attach(filedata.name, content, filedata.content_type)
