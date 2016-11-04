@@ -44,7 +44,8 @@ class FormSubmission(FormView):
         if self.request.is_ajax():
             response = {
                 'formIsValid': True,
-                'redirectUrl': form.redirect_url
+                'redirectUrl': form.redirect_url,
+                'message': form.form_definition.post_submit_msg,
             }
             return JsonResponse(response)
         else:
