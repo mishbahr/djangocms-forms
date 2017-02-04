@@ -151,10 +151,7 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
+        self._update_attr_placeholder(field, widget_attrs)
 
         field_attrs.update({
             'widget': forms.TextInput(attrs=widget_attrs)
@@ -165,10 +162,7 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
+        self._update_attr_placeholder(field, widget_attrs)
 
         field_attrs.update({
             'widget': forms.Textarea(attrs=widget_attrs)
@@ -179,10 +173,7 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs(extra_attrs={'autocomplete': 'email'})
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
+        self._update_attr_placeholder(field, widget_attrs)
 
         field_attrs.update({
             'widget': forms.EmailInput(attrs=widget_attrs),
@@ -292,10 +283,7 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
+        self._update_attr_placeholder(field, widget_attrs)
 
         field_attrs.update({
             'widget': forms.NumberInput(attrs=widget_attrs)
@@ -306,10 +294,7 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
+        self._update_attr_placeholder(field, widget_attrs)
 
         field_attrs.update({
             'widget': forms.URLInput(attrs=widget_attrs)
@@ -320,10 +305,7 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
+        self._update_attr_placeholder(field, widget_attrs)
 
         field_attrs.update({
             'widget': forms.PasswordInput(attrs=widget_attrs),
@@ -334,15 +316,18 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
+        self._update_attr_placeholder(field, widget_attrs)
 
         field_attrs.update({
             'widget': TelephoneInput(attrs=widget_attrs),
         })
         return forms.CharField(**field_attrs)
+
+    def _update_attr_placeholder(self, field, widget_attrs):
+        if field.placeholder_text and not field.initial:
+            widget_attrs.update({
+                'placeholder': field.placeholder_text,
+            })
 
     def save(self, request):
         form_data = []
