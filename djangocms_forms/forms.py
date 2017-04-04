@@ -388,7 +388,7 @@ class SubmissionExportForm(forms.Form):
         ('csv', _('CSV')),
         ('json', _('JSON')),
         ('yaml', _('YAML')),
-        ('xls', _('Microsoft Excel')),
+        ('xlsx', _('Microsoft Excel')),
     )
 
     form = forms.ModelChoiceField(
@@ -396,7 +396,7 @@ class SubmissionExportForm(forms.Form):
         error_messages={'required': _('Please select a form.')},
         help_text=_('Select the form you would like to export entry data from. '
                     'You may only export data from one form at a time.'))
-    file_type = forms.ChoiceField(choices=FORMAT_CHOICES, initial='xls', required=False)
+    file_type = forms.ChoiceField(choices=FORMAT_CHOICES, initial='xlsx', required=False)
     headers = MultipleChoiceAutoCompleteField(
         label=_('Fields'), required=False,
         widget=FilteredSelectMultiple(verbose_name=_('Fields'), is_stacked=False),)

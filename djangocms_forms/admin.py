@@ -221,14 +221,14 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                 dataset.append(row)
 
             mimetype = {
-                'xls': 'application/vnd.ms-excel',
+                'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 'csv': 'text/csv',
                 'html': 'text/html',
                 'yaml': 'text/yaml',
                 'json': 'application/json',
             }
 
-            file_type = data.get('file_type', 'xls')
+            file_type = data.get('file_type', 'xlsx')
             filename = settings.DJANGOCMS_FORMS_EXPORT_FILENAME.format(
                 form_name=slugify(latest_submission.plugin.name))
             filename = timezone.now().strftime(filename)
