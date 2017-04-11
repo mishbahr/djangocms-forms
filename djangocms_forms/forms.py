@@ -121,7 +121,7 @@ class FormBuilder(forms.Form):
         elif form_definition.use_recaptcha:
             field_name = 'recaptcha_%s' % int_to_hashid(form_definition.pk, min_length=8)
             self.fields[field_name] = ReCaptchaField(label=_('Are you a robot?'))
-            
+
     def get_unique_field_name(self, field):
         field_name = field.field_name or field.label
         field_name = '%s' % (slugify(unidecode(field_name).replace('-', '_')))
@@ -151,11 +151,6 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
-
         field_attrs.update({
             'widget': forms.TextInput(attrs=widget_attrs)
         })
@@ -165,11 +160,6 @@ class FormBuilder(forms.Form):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs()
 
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
-
         field_attrs.update({
             'widget': forms.Textarea(attrs=widget_attrs)
         })
@@ -178,11 +168,6 @@ class FormBuilder(forms.Form):
     def prepare_email(self, field):
         field_attrs = field.build_field_attrs()
         widget_attrs = field.build_widget_attrs(extra_attrs={'autocomplete': 'email'})
-
-        if field.placeholder_text and not field.initial:
-            widget_attrs.update({
-                'placeholder': field.placeholder_text,
-            })
 
         field_attrs.update({
             'widget': forms.EmailInput(attrs=widget_attrs),

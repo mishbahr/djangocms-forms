@@ -179,6 +179,12 @@ class FormField(models.Model):
                 and 'required' not in attrs and self.field_type not in ('hidden', 'radio', )):
             attrs['required'] = 'required'
 
+        if self.field_type in settings.DJANGOCMS_FORMS_FIELD_TYPES_WITH_PLACEHOLDER:
+            if self.placeholder_text and not self.initial:
+                attrs.update({
+                    'placeholder': self.placeholder_text,
+                })
+
         css_classes = {
             '__all__': (),
             'text': ('textinput',),
