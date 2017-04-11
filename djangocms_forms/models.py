@@ -145,6 +145,7 @@ class FormField(models.Model):
         _('Choices'),  blank=True,
         help_text=_('Enter options one per line. For "File Upload" '
                     'field type, enter allowed filetype (e.g .pdf) one per line.'))
+    css_class = models.CharField(_('CSS class'), max_length=100, blank=True)
     position = models.PositiveIntegerField(_('Position'), blank=True, null=True)
 
     class Meta:
@@ -208,7 +209,8 @@ class FormField(models.Model):
 
         css_classes = (attrs.get('class', ''), ) + \
             css_classes.get('__all__', ()) + \
-            css_classes.get(self.field_type, ())
+            css_classes.get(self.field_type, ()) + \
+            (self.css_class, )
 
         attrs['class'] = ' '.join(cls.strip() for cls in css_classes if cls.strip())
         return attrs
