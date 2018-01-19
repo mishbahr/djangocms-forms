@@ -101,6 +101,41 @@ or on a per-form basis via the ``redirect_delay`` field. The order of precedence
 
     instance.redirect_delay > DJANGOCMS_FORMS_REDIRECT_DELAY > 1000 (default)
 
+Form fields for the plugin ``DJANGOCMS_FORMS_FIELDSETS``::
+
+    DJANGOCMS_FORMS_FIELDSETS = (
+            (None, {'fields': ('name', )}),
+
+            (None, {
+                'description': _('The <strong>Title</strong> and <strong>Description</strong> '
+                                 'will display above the input fields and Submit button.'),
+                'fields': ('title', 'description', )
+            }),
+            (None, {
+                'description': _('By default, the Submit Button will say <strong>Submit</strong>. '
+                                 'You can change this to say whatever you want'),
+                'fields': ('submit_btn_txt', 'form_template', )
+            }),
+            (None, {
+                'description': _('You can also change the message that appears after someone '
+                                 'submits your form. '
+                                 'By default, this says <strong>Thank you!</strong>, '
+                                 'but you are welcome to change this text as well.'),
+                'fields': ('post_submit_msg', )
+            }),
+            (None, {
+                'fields': ('success_redirect', ('page_redirect', 'external_redirect'), 'redirect_delay',),
+            }),
+            (None, {
+                'description': '<strong>Submission Settings</strong> &mdash; '
+                               'Choose storage options to capture form data. You can enter '
+                               'an email address to have the form submissions emailed to you or '
+                               'log all the form submissions to the database.',
+                'fields': ('email_to', 'email_from', 'email_subject',
+                           'email_uploaded_files', 'save_data', 'spam_protection', ),
+            }),
+        )
+
 
 Preview
 --------
