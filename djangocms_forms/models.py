@@ -70,7 +70,12 @@ class FormDefinition(CMSPlugin):
         _('Send form data to e-mail address'), max_length=255, blank=True,
         help_text=_('Separate several addresses with a comma.'))
     email_from = models.EmailField(_('Sender Email Address'), max_length=255, blank=True)
-    email_subject = models.CharField(_('Email Subject'), max_length=255, blank=True)
+    email_reply_to = models.CharField(_('Reply to'), max_length=255, blank=True,
+        help_text=_('Reply to e-mail header. Use form field values by inserting placeholders of '
+                    'field names, e.g. "{my name field} <{my email field}>"'))
+    email_subject = models.CharField(_('Email Subject'), max_length=255, blank=True,
+        help_text=_('Use form field values by inserting placeholders of '
+                    'field names, e.g. "{my subject}"'))
     email_uploaded_files = models.BooleanField(
         _('Send uploaded files as email attachments'), default=True)
 
