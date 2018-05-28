@@ -11,7 +11,7 @@
         {% for item in form_data %}
             <p>
                 <strong>{% if item.label %}{{ item.label }}{% else %}{{ item.name }}{% endif %}:</strong><br/>
-                {{ item.value|friendly|default_if_none:'—' }}
+                {{ item.value|friendly|default_if_none:'—'|linebreaksbr }}
             </p>
         {% endfor %}
         {% trans 'Sent via' %} <a href="http://{{ request.get_host }}{{ referrer }}">{{ request.get_host }}{{ referrer }}</a>
