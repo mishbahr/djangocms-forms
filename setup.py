@@ -36,6 +36,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'django-appconf',
+        'django-bleach>=0.4.0',
         'django-ipware',
         'jsonfield',
         'unidecode',
