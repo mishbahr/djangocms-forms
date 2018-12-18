@@ -13,6 +13,7 @@ from django.template.defaultfilters import slugify
 from django.template.loader import get_template, render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+from django_bleach.forms import BleachField
 from ipware.ip import get_ip
 from unidecode import unidecode
 
@@ -154,7 +155,7 @@ class FormBuilder(forms.Form):
         field_attrs.update({
             'widget': forms.TextInput(attrs=widget_attrs)
         })
-        return forms.CharField(**field_attrs)
+        return BleachField(**field_attrs)
 
     def prepare_textarea(self, field):
         field_attrs = field.build_field_attrs()
@@ -163,7 +164,7 @@ class FormBuilder(forms.Form):
         field_attrs.update({
             'widget': forms.Textarea(attrs=widget_attrs)
         })
-        return forms.CharField(**field_attrs)
+        return BleachField(**field_attrs)
 
     def prepare_email(self, field):
         field_attrs = field.build_field_attrs()
@@ -271,7 +272,7 @@ class FormBuilder(forms.Form):
         field_attrs.update({
             'widget': forms.HiddenInput(attrs=widget_attrs),
         })
-        return forms.CharField(**field_attrs)
+        return BleachField(**field_attrs)
 
     def prepare_number(self, field):
         field_attrs = field.build_field_attrs()
@@ -298,7 +299,7 @@ class FormBuilder(forms.Form):
         field_attrs.update({
             'widget': forms.PasswordInput(attrs=widget_attrs),
         })
-        return forms.CharField(**field_attrs)
+        return BleachField(**field_attrs)
 
     def prepare_phone(self, field):
         field_attrs = field.build_field_attrs()
@@ -307,7 +308,7 @@ class FormBuilder(forms.Form):
         field_attrs.update({
             'widget': TelephoneInput(attrs=widget_attrs),
         })
-        return forms.CharField(**field_attrs)
+        return BleachField(**field_attrs)
 
     def save(self, request):
         form_data = []
