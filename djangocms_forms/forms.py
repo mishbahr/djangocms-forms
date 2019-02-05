@@ -16,7 +16,9 @@ from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_ip
 from unidecode import unidecode
 
-from .fields import FormBuilderFileField, HoneyPotField, MultipleChoiceAutoCompleteField, ReCaptchaField
+from captcha.fields import ReCaptchaField
+
+from .fields import FormBuilderFileField, HoneyPotField, MultipleChoiceAutoCompleteField
 from .models import Form, FormDefinition, FormField, FormSubmission
 from .utils import int_to_hashid
 from .widgets import DateInput, TelephoneInput, TimeInput

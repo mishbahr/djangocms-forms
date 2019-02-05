@@ -37,6 +37,7 @@ setup(
     install_requires=[
         'django-appconf',
         'django-ipware',
+        'django-recaptcha',
         'jsonfield',
         'unidecode',
         'tablib',
