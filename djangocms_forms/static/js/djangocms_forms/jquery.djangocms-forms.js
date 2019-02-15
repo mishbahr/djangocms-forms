@@ -46,7 +46,7 @@
                 $(this).ajaxSubmit(ajaxOptions);
             });
 
-            if (typeof(grecaptcha) == 'undefined') || typeof(grecaptcha.render) =='undefined') { {
+            if (typeof(grecaptcha) == 'undefined') || typeof(grecaptcha.render) =='undefined') {
                 window.reCapctchaOnloadCallback = function() {
                     this.renderReCaptcha();
                 }.bind(this);
