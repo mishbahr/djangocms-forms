@@ -356,10 +356,10 @@ class FormBuilder(forms.Form):
         for field in form_data:
             if mail_reply_to:
                 mail_reply_to = mail_reply_to.replace('{{{0}}}'.format(field['label']),
-                                                      field['value'])
+                                                      str(field['value']))
 
             mail_subject = mail_subject.replace('{{{0}}}'.format(field['label']),
-                                                field['value'])
+                                                str(field['value']))
 
         if mail_reply_to:
             mail_reply_to = (mail_reply_to,)
