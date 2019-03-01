@@ -341,6 +341,7 @@ class FormBuilder(forms.Form):
     def email_submission(self, form_data, request, referrer):
         mail_to = re.compile('\s*[,;]+\s*').split(self.form_definition.email_to)
         mail_from = self.form_definition.email_from or None
+        mail_reply_to = self.form_definition.email_reply_to or None
         mail_subject = self.form_definition.email_subject or \
             'Form Submission - %s' % self.form_definition.name
         context = {
@@ -352,10 +353,22 @@ class FormBuilder(forms.Form):
             'recipients': mail_to,
         }
 
+        for field in form_data:
+            if mail_reply_to:
+                mail_reply_to = mail_reply_to.replace('{{{0}}}'.format(field['label']),
+                                                      str(field['value']))
+
+            mail_subject = mail_subject.replace('{{{0}}}'.format(field['label']),
+                                                str(field['value']))
+
+        if mail_reply_to:
+            mail_reply_to = (mail_reply_to,)
+
         message = render_to_string('djangocms_forms/email_template/email.txt', context)
         message_html = render_to_string('djangocms_forms/email_template/email.html', context)
 
-        email = EmailMultiAlternatives(mail_subject, message, mail_from, mail_to)
+        email = EmailMultiAlternatives(mail_subject, message, mail_from, mail_to,
+                                       reply_to=mail_reply_to)
         email.attach_alternative(message_html, 'text/html')
 
         if self.form_definition.email_uploaded_files:
