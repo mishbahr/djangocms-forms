@@ -7,7 +7,7 @@ import re
 from django import forms
 from django.contrib.admin.widgets import AdminDateWidget, FilteredSelectMultiple
 from django.core.mail import EmailMultiAlternatives
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template import TemplateDoesNotExist
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template, render_to_string
