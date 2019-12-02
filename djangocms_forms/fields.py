@@ -64,7 +64,7 @@ class PluginReferenceField(models.ForeignKey):
         super(PluginReferenceField, self).__init__(*args, **kwargs)
 
     def _create(self, model_instance):
-        return self.rel.to._default_manager.create(name=model_instance.name)
+        return self.remote_field.model._default_manager.create(name=model_instance.name)
 
     def pre_save(self, model_instance, add):
         if not model_instance.pk and add:
