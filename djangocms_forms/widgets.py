@@ -20,13 +20,3 @@ class DateInput(widgets.TextInput):
 
 class TimeInput(widgets.TextInput):
     input_type = 'time'
-
-
-class ReCaptchaWidget(widgets.Widget):
-
-    def render(self, name, value, attrs=None):
-        template = '<div class="g-recaptcha" id="%(widget_id)s"></div>'
-        return mark_safe(template % {'widget_id': 'id_%s' % name})
-
-    def value_from_datadict(self, data, files, name):
-        return (data.get('g-recaptcha-response', None), )
