@@ -1,3 +1,3 @@
-__version__ = '202001231326'
+__version__ = "202001231449"
 
-default_app_config = 'djangocms_forms.apps.DjangoCMSFormsConfig'
+default_app_config = "djangocms_forms.apps.DjangoCMSFormsConfig"
