@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 
 import re
 
+from cms.models import CMSPlugin
+from cms.models.fields import PageField
 from django.db import models
+from django.db.models import DO_NOTHING
 from django.template.defaultfilters import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
-from cms.models import CMSPlugin
-from cms.models.fields import PageField
 from jsonfield import JSONField
 from unidecode import unidecode
 
@@ -245,7 +245,9 @@ class FormSubmission(models.Model):
         Form, verbose_name=_("Form"), editable=False, related_name="submissions", on_delete=models.CASCADE
     )
     creation_date = models.DateTimeField(_("Date"), auto_now=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("User"), editable=False, null=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_("User"), editable=False, null=True, on_delete=DO_NOTHING
+    )
     ip = models.GenericIPAddressField(verbose_name="IP", blank=True, null=True)
     referrer = models.CharField(_("Referrer URL"), max_length=150, blank=True)
 
