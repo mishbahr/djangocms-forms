@@ -1,9 +1,9 @@
 from django import forms, template
 from django.template.defaultfilters import yesno
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 from django.utils.six import string_types
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_text
 
 from djangocms_forms.fields import HoneyPotField
 
@@ -55,7 +55,7 @@ def classes(field):
     """
     Returns CSS classes of a field
     """
-    return field.widget.attrs.get('class', None)
+    return field.widget.attrs.get("class", None)
 
 
 @register.filter
@@ -68,13 +68,13 @@ def input_class(field):
 
 @register.filter
 def friendly(value):
-    if value in (None, '', [], (), {}):
+    if value in (None, "", [], (), {}):
         return None
 
     if type(value) is list:
-        value = ', '.join(value)
+        value = ", ".join(value)
     if type(value) is bool:
-        value = yesno(value, u'{0},{1}'.format(_('Yes'), _('No')))
+        value = yesno(value, u"{0},{1}".format(_("Yes"), _("No")))
     if not isinstance(value, string_types):
         value = force_text(value)
     return value
@@ -82,16 +82,16 @@ def friendly(value):
 
 @register.filter
 def to_html(field):
-    value = field['value']
-    field_type = field['type']
+    value = field["value"]
+    field_type = field["type"]
 
-    if value in (None, '', [], (), {}):
-        return mark_safe('&mdash;')
+    if value in (None, "", [], (), {}):
+        return mark_safe("&mdash;")
 
-    if field_type == 'file':
+    if field_type == "file":
         value = '<a href="{0}">{0}</a>'.format(value)
-    if field_type == 'checkbox':
-        value = yesno(bool(value), u'{0},{1}'.format(_('Yes'), _('No')))
-    if field_type == 'checkbox_multiple':
-        value = ', '.join(list(value))
+    if field_type == "checkbox":
+        value = yesno(bool(value), u"{0},{1}".format(_("Yes"), _("No")))
+    if field_type == "checkbox_multiple":
+        value = ", ".join(list(value))
     return mark_safe(value)
