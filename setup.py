@@ -29,7 +29,7 @@ setup(
     long_description=readme,
     author='Amos Vryhof,Mishbah Razzaque',
     author_email='amos@vryhofresearch.com,mishbahx@gmail.com',
-    url='https://github.com/mishbahr/djangocms-forms',
+    url='https://github.com/avryhof/djangocms-forms',
     packages=[
         'djangocms_forms',
     ],
