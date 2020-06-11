@@ -24,7 +24,7 @@ class TimeInput(widgets.TextInput):
 
 class ReCaptchaWidget(widgets.Widget):
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         template = '<div class="g-recaptcha" id="%(widget_id)s"></div>'
         return mark_safe(template % {'widget_id': 'id_%s' % name})
 
