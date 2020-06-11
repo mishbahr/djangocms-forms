@@ -330,7 +330,7 @@ class FormBuilder(forms.Form):
             self.email_submission(form_data, request=request, referrer=referrer)
 
     def save_to_db(self, form_data, request, referrer):
-        user = request.user if request.user.is_authenticated() else None
+        user = request.user if request.user.is_authenticated else None
         FormSubmission.objects.create(
             plugin=self.form_definition.plugin_reference,
             ip=get_ip(request),
