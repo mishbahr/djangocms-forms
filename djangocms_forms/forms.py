@@ -13,7 +13,11 @@ from django.template.defaultfilters import slugify
 from django.template.loader import get_template, render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from ipware.ip import get_ip
+try:
+    from ipware.ip import get_ip as get_ip
+except:
+    from ipware.ip import get_client_ip as get_ip
+
 from unidecode import unidecode
 
 from captcha.fields import ReCaptchaField
