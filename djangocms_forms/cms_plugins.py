@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+
+
 
 from django import forms
 from django.contrib import admin
@@ -31,8 +31,8 @@ class FormFieldInline(admin.StackedInline):
     def get_fieldsets(self, request, obj=None):
         fields = (
             ('label', 'field_type', 'required'),
-            'initial', 'placeholder_text', 'help_text', 
-            'choice_values', 'position', 
+            'initial', 'placeholder_text', 'help_text',
+            'choice_values', 'position',
         )
 
         if settings.DJANGOCMS_FORMS_ALLOW_CUSTOM_FIELD_NAME:

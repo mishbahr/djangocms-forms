@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+
+
 
 import logging
 import os
@@ -15,7 +15,6 @@ from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 
 from .conf import settings
-from .widgets import ReCaptchaWidget
 
 logger = logging.getLogger('djangocms_forms')
 
@@ -64,7 +63,7 @@ class PluginReferenceField(models.ForeignKey):
         super(PluginReferenceField, self).__init__(*args, **kwargs)
 
     def _create(self, model_instance):
-        return self.rel.to._default_manager.create(name=model_instance.name)
+        return self.remote_field.model._default_manager.create(name=model_instance.name)
 
     def pre_save(self, model_instance, add):
         if not model_instance.pk and add:
@@ -108,42 +107,3 @@ class HoneyPotField(forms.BooleanField):
     def validate(self, value):
         if value:
             raise forms.ValidationError(_('Doh! You are a robot!'))
-
-
-class ReCaptchaField(forms.CharField):
-    widget = ReCaptchaWidget
-    default_error_messages = {
-        'invalid': _('Error verifying input, please try again.'),
-        'recaptcha_error': _('Connection to reCaptcha server failed.'),
-    }
-    recaptcha_api = 'https://www.google.com/recaptcha/api/siteverify'
-
-    def __init__(self, *args, **kwargs):
-        super(ReCaptchaField, self).__init__(*args, **kwargs)
-
-    def clean(self, values):
-        super(ReCaptchaField, self).clean(values[0])
-        response_token = values[0]
-
-        try:
-            params = {
-                'secret': settings.DJANGOCMS_FORMS_RECAPTCHA_SECRET_KEY,
-                'response': response_token
-            }
-            r = requests.post(self.recaptcha_api, params=params, timeout=5)
-            r.raise_for_status()
-        except requests.RequestException as e:
-            logger.exception(e)
-            raise ValidationError(self.error_messages['recaptcha_error'])
-
-        data = r.json()
-
-        if bool(data['success']):
-            return values[0]
-        else:
-            if any(code in data.get('error-codes', {})
-                   for code in ('missing-input-secret', 'invalid-input-secret', )):
-                logger.exception('Invalid reCaptcha secret key.')
-                raise ValidationError(self.error_messages['recaptcha_error'])
-            else:
-                raise ValidationError(self.error_messages['invalid'], code='invalid')

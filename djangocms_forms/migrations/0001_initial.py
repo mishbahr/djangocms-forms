@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
+
 
 from django.db import models, migrations
 import jsonfield.fields
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FormDefinition',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(on_delete=models.deletion.CASCADE, parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
                 ('name', models.CharField(max_length=255, verbose_name='Form Name')),
                 ('title', models.CharField(max_length=150, verbose_name='Title', blank=True)),
                 ('description', models.TextField(verbose_name='Description', blank=True)),
@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
                 ('initial', models.CharField(max_length=255, verbose_name='Default Value', blank=True)),
                 ('choice_values', models.TextField(help_text='Enter options one per line. For "File Upload" field type, enter allowed filetype (e.g .pdf) one per line.', verbose_name='Choices', blank=True)),
                 ('position', models.PositiveIntegerField(null=True, verbose_name='Position', blank=True)),
-                ('form', models.ForeignKey(related_name='fields', to='djangocms_forms.FormDefinition')),
+                ('form', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='fields', to='djangocms_forms.FormDefinition')),
             ],
             options={
                 'ordering': ('position',),
@@ -84,8 +84,8 @@ class Migration(migrations.Migration):
                 ('creation_date', models.DateTimeField(auto_now=True, verbose_name='Date')),
                 ('ip', models.GenericIPAddressField(null=True, verbose_name=b'IP', blank=True)),
                 ('form_data', jsonfield.fields.JSONField(verbose_name='Form Data')),
-                ('created_by', models.ForeignKey(editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='User')),
-                ('plugin', models.ForeignKey(related_name='submissions', editable=False, to='djangocms_forms.Form', verbose_name='Form')),
+                ('created_by', models.ForeignKey(on_delete=models.deletion.CASCADE, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='User')),
+                ('plugin', models.ForeignKey(on_delete=models.deletion.CASCADE, related_name='submissions', editable=False, to='djangocms_forms.Form', verbose_name='Form')),
             ],
             options={
                 'ordering': ('-creation_date',),

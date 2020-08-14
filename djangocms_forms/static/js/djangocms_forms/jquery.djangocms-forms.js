@@ -15,10 +15,6 @@
             errorItem: '<li></li>',
             ajaxErrorMsg: 'We\'re sorry. Something Unexpected Happened. Please Try Again Later.',
 
-            reCaptchaSiteKey: '',
-            reCaptchaTheme: 'light',
-            reCaptchaSize: 'normal',
-
             // needed in case someone overrides the template and doesn't pass
             // in the value when initializing the cmsForms object
             redirectDelay: 1000
@@ -45,28 +41,9 @@
                 e.preventDefault();
                 $(this).ajaxSubmit(ajaxOptions);
             });
-
-            if (typeof(grecaptcha) == 'undefined') {
-                window.reCapctchaOnloadCallback = function() {
-                    this.renderReCaptcha();
-                }.bind(this);
-            } else {
-                this.renderReCaptcha();
-            }
         },
         getForm: function() {
             return $('form', this.el);
-        },
-        renderReCaptcha: function() {
-            var that = this;
-            $('.g-recaptcha').each(function() {
-                var widgetId = $(this).attr('id');
-                grecaptcha.render(widgetId, {
-                    sitekey: that.settings.reCaptchaSiteKey,
-                    size: that.settings.reCaptchaSize,
-                    theme: that.settings.reCaptchaTheme
-                });
-            });
         },
         ajaxSuccess: function(response) {
             if (response.formIsValid) this.formValid(response);
