@@ -1,4 +1,6 @@
 -e .
-wheel==0.24.0
+wheel==0.33.6
 
 # Additional requirements go here
+jsonfield==2.0.2
+tablib
