@@ -19,6 +19,7 @@ class FileStorage(LazyObject):
     def _setup(self):
         self._wrapped = get_storage_class(settings.DJANGOCMS_FORMS_FILE_STORAGE)()
 
+
 file_storage = FileStorage()
 
 
@@ -32,10 +33,13 @@ def handle_uploaded_files(form):
             valid_file_name = file_storage.get_valid_name(uploaded_file.name)
             root, ext = os.path.splitext(valid_file_name)
             secret_hash = hashlib.sha1(force_bytes(uuid.uuid4())).hexdigest()
-            filename = file_storage.get_available_name(os.path.join(
-                settings.DJANGOCMS_FORMS_FILE_STORAGE_DIR,
-                form.form_definition.upload_to,
-                '{root}_{hash}{ext}'.format(root=root, hash=secret_hash, ext=ext)))
+            filename = file_storage.get_available_name(
+                os.path.join(
+                    settings.DJANGOCMS_FORMS_FILE_STORAGE_DIR,
+                    form.form_definition.upload_to,
+                    "{root}_{hash}{ext}".format(root=root, hash=secret_hash, ext=ext),
+                )
+            )
             file_storage.save(filename, uploaded_file)
             form.cleaned_data[field] = StoredUploadedFile(filename)
 
@@ -56,10 +60,10 @@ class StoredUploadedFile(FieldFile):
         return file_storage
 
     def save(self, *args, **kwargs):
-        raise NotImplementedError('Static files are read-only')
+        raise NotImplementedError("Static files are read-only")
 
     def delete(self, *args, **kwargs):
-        raise NotImplementedError('Static files are read-only')
+        raise NotImplementedError("Static files are read-only")
 
     def __unicode__(self):
         return self.name

@@ -1,36 +1,31 @@
-================
-djangocms-forms
-================
+==========================
+djangocms-forms-maintained
+==========================
 
-.. image:: http://img.shields.io/travis/mishbahr/djangocms-forms.svg?style=flat-square
-    :target: https://travis-ci.org/mishbahr/djangocms-forms/
-
-.. image:: http://img.shields.io/pypi/v/djangocms-forms.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/djangocms-forms/
+.. image:: http://img.shields.io/pypi/v/djangocms-forms-maintained.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-forms-maintained/
     :alt: Latest Version
 
-.. image:: http://img.shields.io/pypi/dm/djangocms-forms.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/djangocms-forms/
+.. image:: http://img.shields.io/pypi/dm/djangocms-forms-maintained.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-forms-maintained/
     :alt: Downloads
 
-.. image:: http://img.shields.io/pypi/l/djangocms-forms.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/djangocms-forms/
+.. image:: http://img.shields.io/pypi/l/djangocms-forms-maintained.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-forms-maintained/
     :alt: License
 
-.. image:: http://img.shields.io/coveralls/mishbahr/djangocms-forms.svg?style=flat-square
-  :target: https://coveralls.io/r/mishbahr/djangocms-forms?branch=master
-
-This project requires django-cms v3.0 or higher to be properly installed and configured.
+This project requires django-cms v3.6 or higher to be properly installed and configured.
 
 This package is compatible with `Aldryn <http://www.aldryn.com/en/marketplace/djangocms-forms/>`_.
 
+This version uses https://github.com/praekelt/django-recaptcha for ReCaptcha capabilities.
 
 Quickstart
 ----------
 
-1. Install ``djangocms-forms``::
+1. Install ``djangocms-forms-maintained``::
 
-    pip install djangocms-forms
+    pip install djangocms-forms-maintained
 
 2. Add ``djangocms_forms`` to ``INSTALLED_APPS``::
 
@@ -131,8 +126,8 @@ Preview
   :align: center
 
 
-You may also like...
---------------------
+You may also like the original author's plugins...
+--------------------------------------------------
 
 * djangocms-disqus - https://github.com/mishbahr/djangocms-disqus
 * djangocms-embed - https://github.com/mishbahr/djangocms-embed
