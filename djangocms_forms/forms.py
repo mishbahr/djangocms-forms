@@ -20,8 +20,8 @@ try:
 except ImportError:
     from ipware.ip import get_client_ip
 
-    def get_ip():
-        return get_client_ip()[0]
+    def get_ip(*args, **kwargs):
+        return get_client_ip(*args, **kwargs)[0]
 
 from unidecode import unidecode
 

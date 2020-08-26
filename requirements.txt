@@ -4,4 +4,3 @@ wheel==0.33.6
 # Additional requirements go here
 jsonfield==2.0.2
 tablib
-django-ipware==2.1.0
