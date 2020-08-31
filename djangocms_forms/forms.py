@@ -14,7 +14,15 @@ from django.template.defaultfilters import slugify
 from django.template.loader import get_template, render_to_string
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from ipware.ip import get_ip
+
+try:
+    from ipware.ip import get_ip
+except ImportError:
+    from ipware.ip import get_client_ip
+
+    def get_ip(*args, **kwargs):
+        return get_client_ip(*args, **kwargs)[0]
+
 from unidecode import unidecode
 
 from .fields import FormBuilderFileField, HoneyPotField, MultipleChoiceAutoCompleteField
@@ -168,7 +176,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs(extra_attrs={"autocomplete": "email"})
 
         field_attrs.update(
-            {"widget": forms.EmailInput(attrs=widget_attrs),}
+            {"widget": forms.EmailInput(attrs=widget_attrs), }
         )
         return forms.EmailField(**field_attrs)
 
@@ -187,7 +195,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs()
 
         field_attrs.update(
-            {"widget": forms.CheckboxSelectMultiple(attrs=widget_attrs), "choices": field.get_choices(),}
+            {"widget": forms.CheckboxSelectMultiple(attrs=widget_attrs), "choices": field.get_choices(), }
         )
 
         if field.initial:
@@ -212,7 +220,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs()
 
         field_attrs.update(
-            {"widget": forms.RadioSelect(attrs=widget_attrs), "choices": field.get_choices(),}
+            {"widget": forms.RadioSelect(attrs=widget_attrs), "choices": field.get_choices(), }
         )
         return forms.ChoiceField(**field_attrs)
 
@@ -233,7 +241,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs()
 
         field_attrs.update(
-            {"widget": DateInput(attrs=widget_attrs),}
+            {"widget": DateInput(attrs=widget_attrs), }
         )
         return forms.DateField(**field_attrs)
 
@@ -242,7 +250,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs()
 
         field_attrs.update(
-            {"widget": TimeInput(attrs=widget_attrs),}
+            {"widget": TimeInput(attrs=widget_attrs), }
         )
         return forms.TimeField(**field_attrs)
 
@@ -251,7 +259,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs()
 
         field_attrs.update(
-            {"widget": forms.HiddenInput(attrs=widget_attrs),}
+            {"widget": forms.HiddenInput(attrs=widget_attrs), }
         )
         return forms.CharField(**field_attrs)
 
@@ -274,7 +282,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs()
 
         field_attrs.update(
-            {"widget": forms.PasswordInput(attrs=widget_attrs),}
+            {"widget": forms.PasswordInput(attrs=widget_attrs), }
         )
         return forms.CharField(**field_attrs)
 
@@ -283,7 +291,7 @@ class FormBuilder(forms.Form):
         widget_attrs = field.build_widget_attrs()
 
         field_attrs.update(
-            {"widget": TelephoneInput(attrs=widget_attrs),}
+            {"widget": TelephoneInput(attrs=widget_attrs), }
         )
         return forms.CharField(**field_attrs)
 
@@ -294,7 +302,7 @@ class FormBuilder(forms.Form):
             if hasattr(value, "url"):
                 value = value.url
             form_data.append(
-                {"name": field, "label": self.fields[field].label, "value": value, "type": self.field_types[field],}
+                {"name": field, "label": self.fields[field].label, "value": value, "type": self.field_types[field], }
             )
 
         referrer = self.cleaned_data.get("referrer", "")
