@@ -17,7 +17,7 @@
 .inline-related .collapse-expand {
     display: inline-block;
     text-transform: uppercase;
-    padding: 0px 10px 0px 10px;
+    padding: 0 10px 0 10px;
     width: 44px;
     float: left;
     text-decoration:none!important;
