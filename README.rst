@@ -14,6 +14,10 @@ djangocms-forms-maintained
     :target: https://pypi.python.org/pypi/djangocms-forms-maintained/
     :alt: License
 
+.. image:: https://www.codefactor.io/repository/github/avryhof/djangocms-forms/badge
+   :target: https://www.codefactor.io/repository/github/avryhof/djangocms-forms
+   :alt: CodeFactor
+
 This project requires django-cms v3.6 or higher to be properly installed and configured.
 
 This package is compatible with `Aldryn <http://www.aldryn.com/en/marketplace/djangocms-forms/>`_.
