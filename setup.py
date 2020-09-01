@@ -30,6 +30,11 @@ setup(
     author='Amos Vryhof,Mishbah Razzaque',
     author_email='amos@vryhofresearch.com,mishbahx@gmail.com',
     url='https://github.com/avryhof/djangocms-forms',
+    project_urls={
+        'Original Project': 'https://github.com/mishbahr/djangocms-forms',
+        'GitHub Repo': 'https://github.com/avryhof/djangocms-forms',
+        'Bug Tracker': 'https://github.com/avryhof/djangocms-forms/issues'
+    },
     packages=[
         'djangocms_forms',
     ],
