@@ -9,4 +9,4 @@ It is your responsibility to update on a regular basis.
 
 Use this section to tell people how to report a vulnerability.
 
-All security vulnerabilities should be reported in the [Issue Tracker|]
+All security vulnerabilities should be reported in the [Issue Tracker](https://github.com/avryhof/djangocms-forms/issues)
