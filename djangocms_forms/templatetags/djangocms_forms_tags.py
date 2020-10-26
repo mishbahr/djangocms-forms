@@ -71,9 +71,9 @@ def friendly(value):
     if value in (None, "", [], (), {}):
         return None
 
-    if type(value) is list:
+    if isinstance(value, list):
         value = ", ".join(value)
-    if type(value) is bool:
+    if isinstance(value, bool):
         value = yesno(value, u"{0},{1}".format(_("Yes"), _("No")))
     if not isinstance(value, string_types):
         value = force_text(value)
