@@ -113,10 +113,13 @@ class FormDefinition(CMSPlugin):
 
     @property
     def redirect_url(self):
+        url = None
         if self.page_redirect:
-            return self.page_redirect.get_absolute_url()
+            url = self.page_redirect.get_absolute_url()
         elif self.external_redirect:
-            return self.external_redirect
+            url = self.external_redirect
+
+        return url
 
     @property
     def upload_to(self):
