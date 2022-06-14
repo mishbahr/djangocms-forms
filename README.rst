@@ -47,9 +47,10 @@ Quickstart
 
     urlpatterns = patterns(
         ...
-        url(r'^', include('djangocms_forms.urls')),
+        path('', include('djangocms_forms.urls')),
         ...
     )
+
 
 5. To use reCAPTCHA for spam protection, you need to sign up for an API key pair for your site::
 
@@ -99,6 +100,20 @@ By default, djangocms-forms will redirect a successful form submission after 100
 or on a per-form basis via the ``redirect_delay`` field. The order of precedence for the redirect value is always::
 
     instance.redirect_delay > DJANGOCMS_FORMS_REDIRECT_DELAY > 1000 (default)
+
+
+As of 202206141310 you can now specify new FORMAT_CHOICES for the form, since tablib seems to be a bit finicky in the latest version::
+
+    DJANGOCMS_FORMS_FORMAT_CHOICES = (
+        ("csv", _("CSV")),
+        ("json", _("JSON")),
+        ("yaml", _("YAML")),
+        ("xlsx", _("Microsoft Excel")),
+    )
+
+it can also be passed in on init with the ``format_choices`` keyword argument.
+
+
 
 
 Preview
