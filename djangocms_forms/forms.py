@@ -8,7 +8,6 @@ from django import forms
 from django.conf import settings
 from django.contrib.admin.widgets import AdminDateWidget, FilteredSelectMultiple
 from django.core.mail import EmailMultiAlternatives
-from django.forms.utils import ErrorList
 from django.template import TemplateDoesNotExist
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template, render_to_string
@@ -353,12 +352,15 @@ class FormBuilder(forms.Form):
 
 
 class SubmissionExportForm(forms.Form):
-    FORMAT_CHOICES = (
-        ("csv", _("CSV")),
-        ("json", _("JSON")),
-        ("yaml", _("YAML")),
-        ("xlsx", _("Microsoft Excel")),
-    )
+    if isinstance(settings.DJANGOCMS_FORMS_FORMAT_CHOICES, tuple):
+        FORMAT_CHOICES = settings.DJANGOCMS_FORMS_FORMAT_CHOICES
+    else:
+        FORMAT_CHOICES = (
+            ("csv", _("CSV")),
+            ("json", _("JSON")),
+            ("yaml", _("YAML")),
+            ("xlsx", _("Microsoft Excel")),
+        )
 
     form = forms.ModelChoiceField(
         queryset=Form.active_objects.all(),
@@ -369,42 +371,13 @@ class SubmissionExportForm(forms.Form):
             "You may only export data from one form at a time."
         ),
     )
-    file_type = forms.ChoiceField(choices=FORMAT_CHOICES, initial="xlsx", required=False)
+    file_type = forms.ChoiceField(
+        choices=FORMAT_CHOICES,
+        initial="xlsx",
+        required=False,
+    )
     headers = MultipleChoiceAutoCompleteField(
         label=_("Fields"), required=False, widget=FilteredSelectMultiple(verbose_name=_("Fields"), is_stacked=False),
     )
     from_date = forms.DateField(label=_("From date"), required=False, widget=AdminDateWidget)
     to_date = forms.DateField(label=_("To date"), required=False, widget=AdminDateWidget)
-
-    def __init__(
-        self,
-        data=None,
-        files=None,
-        auto_id="id_%s",
-        prefix=None,
-        initial=None,
-        error_class=ErrorList,
-        label_suffix=None,
-        empty_permitted=False,
-        field_order=None,
-        use_required_attribute=None,
-        renderer=None,
-        **kwargs
-    ):
-        format_choice_arg = kwargs.get("format_choices", getattr(settings, "DJANGOCMS_FORMS_FORMAT_CHOICES", None))
-        if isinstance(format_choice_arg, tuple):
-            self.FORMAT_CHOICES = format_choice_arg
-
-        super(SubmissionExportForm, self).__init__(
-            data,
-            files,
-            auto_id,
-            prefix,
-            initial,
-            error_class,
-            label_suffix,
-            empty_permitted,
-            field_order,
-            use_required_attribute,
-            renderer,
-        )

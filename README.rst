@@ -111,11 +111,6 @@ As of 202206141310 you can now specify new FORMAT_CHOICES for the form, since ta
         ("xlsx", _("Microsoft Excel")),
     )
 
-it can also be passed in on init with the ``format_choices`` keyword argument.
-
-
-
-
 Preview
 --------
 
