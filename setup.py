@@ -45,7 +45,7 @@ setup(
         'django-recaptcha',
         'jsonfield',
         'unidecode',
-        'tablib',
+        'tablib[xlsx,yaml]',
         'hashids',
         'requests',
         'django-cms>=3.0',

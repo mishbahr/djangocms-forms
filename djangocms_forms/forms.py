@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
 
 import re
 
 from captcha.fields import ReCaptchaField
 from django import forms
+from django.conf import settings
 from django.contrib.admin.widgets import AdminDateWidget, FilteredSelectMultiple
 from django.core.mail import EmailMultiAlternatives
-from django.urls import reverse
+from django.forms.utils import ErrorList
 from django.template import TemplateDoesNotExist
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template, render_to_string
@@ -19,6 +19,7 @@ try:
     from ipware.ip import get_ip
 except ImportError:
     from ipware.ip import get_client_ip
+
 
     def get_ip(*args, **kwargs):
         return get_client_ip(*args, **kwargs)[0]
@@ -374,3 +375,36 @@ class SubmissionExportForm(forms.Form):
     )
     from_date = forms.DateField(label=_("From date"), required=False, widget=AdminDateWidget)
     to_date = forms.DateField(label=_("To date"), required=False, widget=AdminDateWidget)
+
+    def __init__(
+        self,
+        data=None,
+        files=None,
+        auto_id="id_%s",
+        prefix=None,
+        initial=None,
+        error_class=ErrorList,
+        label_suffix=None,
+        empty_permitted=False,
+        field_order=None,
+        use_required_attribute=None,
+        renderer=None,
+        **kwargs
+    ):
+        format_choice_arg = kwargs.get("format_choices", getattr(settings, "DJANGOCMS_FORMS_FORMAT_CHOICES", None))
+        if isinstance(format_choice_arg, tuple):
+            self.FORMAT_CHOICES = format_choice_arg
+
+        super(SubmissionExportForm, self).__init__(
+            data,
+            files,
+            auto_id,
+            prefix,
+            initial,
+            error_class,
+            label_suffix,
+            empty_permitted,
+            field_order,
+            use_required_attribute,
+            renderer,
+        )
