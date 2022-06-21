@@ -24,6 +24,13 @@ This package is compatible with `Aldryn <http://www.aldryn.com/en/marketplace/dj
 
 This version uses https://github.com/praekelt/django-recaptcha for ReCaptcha capabilities.
 
+**Resurrected DjangoCMS Projects**
+
+* https://pypi.org/project/aldryn-bootstrap3-resurrected/
+* https://pypi.org/project/cmsplugin-filer-resurrected/
+* https://pypi.org/project/djangocms-forms-maintained/
+
+
 Quickstart
 ----------
 
