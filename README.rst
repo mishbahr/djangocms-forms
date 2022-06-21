@@ -18,6 +18,10 @@ djangocms-forms-maintained
    :target: https://www.codefactor.io/repository/github/avryhof/djangocms-forms
    :alt: CodeFactor
 
+.. image:: https://img.shields.io/badge/Donate-PayPal-green.svg
+   :target: https://paypal.me/avryhof?country.x=US&locale.x=en_US
+   :alt: Donate
+
 This project requires django-cms v3.6 or higher to be properly installed and configured.
 
 This package is compatible with `Aldryn <http://www.aldryn.com/en/marketplace/djangocms-forms/>`_.
