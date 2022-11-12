@@ -3,19 +3,18 @@
 from __future__ import unicode_literals
 
 from django.forms import widgets
-from django.utils.safestring import mark_safe
 
 
 class TelephoneInput(widgets.TextInput):
-    input_type = 'tel'
+    input_type = "tel"
 
 
 class SearchInput(widgets.TextInput):
-    input_type = 'search'
+    input_type = "search"
 
 
 class DateInput(widgets.TextInput):
-    input_type = 'date'
+    input_type = "date"
 
 
 class TimeInput(widgets.TextInput):
@@ -24,7 +23,7 @@ class TimeInput(widgets.TextInput):
 
 class ReCaptchaWidget(widgets.Widget):
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         template = '<div class="g-recaptcha" id="%(widget_id)s"></div>'
         return mark_safe(template % {'widget_id': 'id_%s' % name})
 

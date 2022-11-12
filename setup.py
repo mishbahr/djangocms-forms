@@ -23,13 +23,18 @@ if sys.argv[-1] == 'publish':
 readme = open('README.rst').read()
 
 setup(
-    name='djangocms-forms',
+    name='djangocms-forms-maintained',
     version=version,
     description="""The easiest and most flexible Django CMS Form builder w/ ReCaptcha v2 support!""",
     long_description=readme,
-    author='Mishbah Razzaque',
-    author_email='mishbahx@gmail.com',
-    url='https://github.com/mishbahr/djangocms-forms',
+    author='Amos Vryhof,Mishbah Razzaque',
+    author_email='amos@vryhofresearch.com,mishbahx@gmail.com',
+    url='https://github.com/avryhof/djangocms-forms',
+    project_urls={
+        'Original Project': 'https://github.com/mishbahr/djangocms-forms',
+        'GitHub Repo': 'https://github.com/avryhof/djangocms-forms',
+        'Bug Tracker': 'https://github.com/avryhof/djangocms-forms/issues'
+    },
     packages=[
         'djangocms_forms',
     ],
@@ -37,16 +42,17 @@ setup(
     install_requires=[
         'django-appconf',
         'django-ipware',
+        'django-recaptcha',
         'jsonfield',
         'unidecode',
-        'tablib',
+        'tablib[xlsx,yaml]',
         'hashids',
         'requests',
         'django-cms>=3.0',
     ],
     license="BSD",
     zip_safe=False,
-    keywords='djangocms-forms',
+    keywords='djangocms-forms-maintained',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Django',

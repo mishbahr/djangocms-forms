@@ -105,6 +105,7 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                 return self.admin_site.admin_view(view)(*args, **kwargs)
             return update_wrapper(wrapper, view)
 
+        # noinspection PyProtectedMember
         info = self.model._meta.app_label, self.model._meta.model_name
 
         extra_urls = [
@@ -213,7 +214,7 @@ class FormSubmissionAdmin(admin.ModelAdmin):
                     if label in headers:
                         row[headers.index(label)] = humanize(field)
 
-                    row[-4] = force_text(submission.created_by or _('Unknown')) 
+                    row[-4] = force_text(submission.created_by or _('Unknown'))
                     row[-3] = submission.creation_date.strftime(
                         settings.DJANGOCMS_FORMS_DATETIME_FORMAT)
                     row[-2] = submission.ip

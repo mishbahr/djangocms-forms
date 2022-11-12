@@ -1,36 +1,46 @@
-================
-djangocms-forms
-================
+==========================
+djangocms-forms-maintained
+==========================
 
-.. image:: http://img.shields.io/travis/mishbahr/djangocms-forms.svg?style=flat-square
-    :target: https://travis-ci.org/mishbahr/djangocms-forms/
-
-.. image:: http://img.shields.io/pypi/v/djangocms-forms.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/djangocms-forms/
+.. image:: http://img.shields.io/pypi/v/djangocms-forms-maintained.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-forms-maintained/
     :alt: Latest Version
 
-.. image:: http://img.shields.io/pypi/dm/djangocms-forms.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/djangocms-forms/
+.. image:: http://img.shields.io/pypi/dm/djangocms-forms-maintained.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-forms-maintained/
     :alt: Downloads
 
-.. image:: http://img.shields.io/pypi/l/djangocms-forms.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/djangocms-forms/
+.. image:: http://img.shields.io/pypi/l/djangocms-forms-maintained.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/djangocms-forms-maintained/
     :alt: License
 
-.. image:: http://img.shields.io/coveralls/mishbahr/djangocms-forms.svg?style=flat-square
-  :target: https://coveralls.io/r/mishbahr/djangocms-forms?branch=master
+.. image:: https://www.codefactor.io/repository/github/avryhof/djangocms-forms/badge
+   :target: https://www.codefactor.io/repository/github/avryhof/djangocms-forms
+   :alt: CodeFactor
 
-This project requires django-cms v3.0 or higher to be properly installed and configured.
+.. image:: https://img.shields.io/badge/Donate-PayPal-green.svg
+   :target: https://paypal.me/avryhof?country.x=US&locale.x=en_US
+   :alt: Donate
+
+This project requires django-cms v3.6 or higher to be properly installed and configured.
 
 This package is compatible with `Aldryn <http://www.aldryn.com/en/marketplace/djangocms-forms/>`_.
+
+This version uses https://github.com/praekelt/django-recaptcha for ReCaptcha capabilities.
+
+**Resurrected DjangoCMS Projects**
+
+* https://pypi.org/project/aldryn-bootstrap3-resurrected/
+* https://pypi.org/project/cmsplugin-filer-resurrected/
+* https://pypi.org/project/djangocms-forms-maintained/
 
 
 Quickstart
 ----------
 
-1. Install ``djangocms-forms``::
+1. Install ``djangocms-forms-maintained``::
 
-    pip install djangocms-forms
+    pip install djangocms-forms-maintained
 
 2. Add ``djangocms_forms`` to ``INSTALLED_APPS``::
 
@@ -48,9 +58,10 @@ Quickstart
 
     urlpatterns = patterns(
         ...
-        url(r'^', include('djangocms_forms.urls')),
+        path('', include('djangocms_forms.urls')),
         ...
     )
+
 
 5. To use reCAPTCHA for spam protection, you need to sign up for an API key pair for your site::
 
@@ -102,6 +113,15 @@ or on a per-form basis via the ``redirect_delay`` field. The order of precedence
     instance.redirect_delay > DJANGOCMS_FORMS_REDIRECT_DELAY > 1000 (default)
 
 
+As of 202206141310 you can now specify new FORMAT_CHOICES for the form, since tablib seems to be a bit finicky in the latest version::
+
+    DJANGOCMS_FORMS_FORMAT_CHOICES = (
+        ("csv", _("CSV")),
+        ("json", _("JSON")),
+        ("yaml", _("YAML")),
+        ("xlsx", _("Microsoft Excel")),
+    )
+
 Preview
 --------
 
@@ -131,8 +151,8 @@ Preview
   :align: center
 
 
-You may also like...
---------------------
+You may also like the original author's plugins...
+--------------------------------------------------
 
 * djangocms-disqus - https://github.com/mishbahr/djangocms-disqus
 * djangocms-embed - https://github.com/mishbahr/djangocms-embed
